@@ -1,30 +1,22 @@
-### Update your path
+### 更新你的路径
 
-You can update your PATH variable for the current session only at the command line,
-as shown in [Clone the Flutter repo](./#clone-the-repo). You'll probably want to 
-update this variable permanently, so you can run `flutter` commands in any terminal session.
+你只能在命令行中更新你当前会话窗口的 PATH 变量，如[克隆 Flutter 库](./#clone-the-repo)所示。当永久更新这个变量，这样子你就可以在任意终端会话中运行 `flutter` 命令了。
 
-The steps for modifying this variable permanently for all terminal sessions are machine-specific.
-Typically you add a line to a file that is executed whenever you open 
-a new window. For example:
+对于计算机来说，永久给全部终端会话修改这个变量这些操作都是不同的。通常，你会打开新窗口时将命令输入。举个例子：
 
-1. Determine the directory where you placed the Flutter SDK. You will
-   need this in Step 3.
-2. Open (or create) `$HOME/.bash_profile`. The file path and filename might be
-   different on your machine.
-3. Add the following line and change `[PATH_TO_FLUTTER_GIT_DIRECTORY]` to be
-   the path where you cloned Flutter's git repo:
+1. 确定好放置 Flutter SDK 的目录，你会在步骤 3 用到它。
+2. 打开（或者创建） `$HOME/.bash_profile` 这个文件或者文件名可能不同于你计算机的。
+3. 添加下面命令行并将`[PATH_TO_FLUTTER_GIT_DIRECTORY]` 改为你克隆 Flutter 仓库的路径：
 
 {% commandline %}
 export PATH=[PATH_TO_FLUTTER_GIT_DIRECTORY]/flutter/bin:$PATH
 {% endcommandline %}
 
-4. Run `source $HOME/.bash_profile` to refresh the current window. 
-
-5. Verify that the `flutter/bin` directory is now in your PATH by running:
+4. 运行 `source $HOME/.bash_profile` 刷新当前窗口。
+5. 验证 `flutter/bin` 是否在你的路径上：
 
 {% commandline %}
 echo $PATH
 {% endcommandline %}
 
-For more details, see [this StackExchange question](https://unix.stackexchange.com/questions/26047/how-to-correctly-add-a-path-to-path).
+更多的细节，可以参阅[ StackExchange 上的问题](https://unix.stackexchange.com/questions/26047/how-to-correctly-add-a-path-to-path)。

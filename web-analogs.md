@@ -10,23 +10,19 @@ permalink: /web-analogs/
 {:toc}
 
 <div class="begin-examples"></div>
-This page is for users who are familiar with the HTML and CSS syntax for
-arranging components of an application's UI. It maps HTML/CSS code snippets to
-their Flutter/Dart code equivalents.
+本页面是面向那些熟悉使用 HTML 和 CSS 编写应用UI组件的开发人员，这里介绍如何将 HTML/CSS 代码转换成等效的 Flutter/Dart 代码。
 
-The examples assume:
-* The HTML document starts with a modern HTML DOCTYPE, and the CSS box model
-for all HTML elements is set to [border-box](https://css-tricks.com/box-sizing/),
-for consistency with the Flutter model.
-   {% prettify css %}<!DOCTYPE html>
+这里的示例基于以下假设：
+* HTML 文档都以 HTML DOCTYPE 开头，所有元素的盒子都是 [border-box](https://css-tricks.com/box-sizing/) ，以便与 Flutter 模型保持一致。
+{% prettify css %}<!DOCTYPE html>
 
    {
      box-sizing: border-box;
    }
 {% endprettify %}
-* In Flutter, the default styling of the "Lorem ipsum" text is defined by the
-`bold24Roboto` variable as follows, to keep the syntax simple:
-  {% prettify dart %}
+
+* 在 Flutter 中，“Lorem ipsum” 文本的默认样式由 bold24Roboto 变量定义，以保持简单的语法。
+{% prettify dart %}
   TextStyle bold24Roboto = new TextStyle(
       color: Colors.white,
       fontSize: 24.0,
@@ -34,17 +30,15 @@ for consistency with the Flutter model.
   );
 {% endprettify %}
 
-## Performing Basic Layout Operations
+## 执行基本布局操作
 
-The following examples show how to perform the most common UI layout tasks.
+以下示例展示如何执行最常见的UI布局任务。
 
-### Styling and Aligning Text
-Font style, size, and other text attributes that CSS handles with the font and
-color properties are individual properties of a [TextStyle](https://docs.flutter.io/flutter/painting/TextStyle-class.html)
-child of a [Text](https://docs.flutter.io/flutter/widgets/Text-class.html) widget.
+### 文本样式和文本对齐
 
-In both HTML and Flutter, by default child elements or widgets are anchored at
-the top left.
+CSS 可以处理的字体样式，字体大小和其他文本属性，还有颜色都在 [Text](https://docs.flutter.io/flutter/widgets/Text-class.html) 控件的子控件 [TextStyle](https://docs.flutter.io/flutter/painting/TextStyle-class.html) 中定义。
+
+在 HTML 和 Flutter 中，默认的子元素或控件都被固定在左上角。
 
 <div class="lefthighlight">
 {% prettify css %}
@@ -78,17 +72,14 @@ the top left.
 {% endprettify %}
 </div>
 
-### Setting Background Color
-In Flutter, you set background color in a [Container](https://docs.flutter.io/flutter/widgets/Container-class.html)’s
-```decoration``` property.
+### 设置背景颜色
+在 Flutter 中，你可以在 [Container](https://docs.flutter.io/flutter/widgets/Container-class.html) 中的 ```decoration``` 属性上设置背景颜色;
 
-The CSS examples use the hex color equivalents to the Material color palette.
 <div class="lefthighlight">
 {% prettify css %}
 <div class="greybox">
   Lorem ipsum
 </div>
-
 .greybox {
 [[highlight]]      background-color: #e0e0e0; [[/highlight]] /* grey 300 */
       width: 320px;
@@ -112,13 +103,10 @@ The CSS examples use the hex color equivalents to the Material color palette.
 {% endprettify %}
 </div>
 
-### Centering Components
-A [Center](https://docs.flutter.io/flutter/widgets/Center-class.html) widget
-centers its child both horizontally and vertically.
+### 组件居中
+[Center](https://docs.flutter.io/flutter/widgets/Center-class.html) 控件能够使它的子控件保持水平和垂直居中。
 
-To accomplish a similar effect in CSS, the parent element uses either a flex
-or table-cell display behavior. The examples on this page show the flex
-behavior.
+如果要在 CSS 达到同样的效果，则需要使用 flex 布局或者 table-cell 样式，下面的示例则使用  flex 布局的方法。
 
 <div class="lefthighlight">
 {% prettify css %}
@@ -154,17 +142,10 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-### Setting Container Width
+### 设置Container宽度
+如果想设置 [Container](https://docs.flutter.io/flutter/widgets/Container-class.html) 的宽度，你需要设置它的 ```width``` 属性。而这里设置的是一个固定的宽度，不像CSS的max-width属性能够自动调整。如果想在Flutter中达到CSS max-width的效果，你可以在Container的 ```constraints```  属性上使用 ```minWidth``` 或 ```maxWidth``` 创建一个 [BoxConstraints](https://docs.flutter.io/flutter/rendering/BoxConstraints-class.html) 对象。
+而对于嵌套的 Container ，如果父控件的宽度小于子控件的宽度，子控件会自动调整自身大小以适应父控件的尺寸。
 
-To specify the width of a [Container](https://docs.flutter.io/flutter/widgets/Container-class.html)
-widget you set its ```width``` property. This is a fixed width, unlike the
-CSS max-width property which adjusts container width up to a maximum value. To
-mimic that effect in Flutter, use the ```constraints``` property of the Container.
-Create a new [BoxConstraints](https://docs.flutter.io/flutter/rendering/BoxConstraints-class.html)
-widget with a ```minWidth``` or ```maxWidth```.
-
-For nested Containers, if the parent’s width is less than the child’s width,
-the child Container sizes itself to match the parent.
 <div class="lefthighlight">
 {% prettify css %}
 <div class="greybox">
@@ -215,18 +196,15 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-## Manipulating Position and Size
-The following examples show how to perform more complex operations on widget
-position, size, and background.
+## 操作位置和尺寸
+下面的示例展示如何在控件定位，尺寸和背景上执行更多复杂的操作。
 
-### Setting Absolute Position
+### 设置绝对定位
 
-By default, widgets are positioned relative to their parent.
+默认情况下，控件是相对于父控件定位的。
 
-To specify an absolute position for a widget as x-y coordinates, nest it in a
-[Positioned](https://docs.flutter.io/flutter/widgets/Positioned-class.html)
-widget that is in turn nested in a [Stack](https://docs.flutter.io/flutter/widgets/Stack-class.html)
-widget.
+如果想使用x-y坐标设置控件的绝对定位，你可以将该控件放到 [Positioned](https://docs.flutter.io/flutter/widgets/Positioned-class.html) 控件，然后再将Positioned控件放到 [Stack](https://docs.flutter.io/flutter/widgets/Stack-class.html) 中。
+
 <div class="lefthighlight">
 {% prettify css %}
 <div class="greybox">
@@ -281,14 +259,13 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-### Rotating Components
+### 旋转组件
 
-To rotate a widget, nest it in a [Transform](https://docs.flutter.io/flutter/widgets/Transform-class.html)
-widget. Use the Transform widget’s ```alignment``` and ```origin``` properties to
-specify the transform origin (fulcrum) in relative and absolute terms, respectively.
+如果想让控件旋转，你可以将该控件放到 [Transform](https://docs.flutter.io/flutter/widgets/Transform-class.html) 控件中，并设置Transorm控件的 ```alignment``` 或 ```origin``` 属性，以相对（自身宽高）或者绝对（设置top，left）的方式去定义变换的原点。
 
-For a simple 2D rotation, the widget is rotated on the Z axis using radians.
-(degrees × π / 180)
+对于一个简单的2D旋转，控件是围绕Z轴使用弧度控制旋转的：
+(旋转角度 × π / 180)
+
 <div class="lefthighlight">
 {% prettify css %}
 <div class="greybox">
@@ -343,17 +320,14 @@ var container = new Container( // gray box
 {% endprettify %}
 </div>
 
-### Scaling Components
+### 缩放组件
 
-To scale a widget up or down, nest it in a [Transform](https://docs.flutter.io/flutter/widgets/Transform-class.html)
-widget. Use the Transform widget’s ```alignment``` and ```origin``` properties to specify
-the transform origin (fulcrum) in relative and absolute terms, respectively.
+让一个控件能够放大缩小，同样可以将该控件放到 [Transform](https://docs.flutter.io/flutter/widgets/Transform-class.html) 中。
 
-For a simple scaling operation along the x-axis, create a new
-[Matrix4](https://docs.flutter.io/flutter/vector_math_64/Matrix4-class.html)
-identity object and use its scale() method to specify the scaling factor.
+对于一个简单的基于X轴的缩放操作，可以创建一个 [Matrix4](https://docs.flutter.io/flutter/vector_math_64/Matrix4-class.html) 对象并使用它的scale()方法去定义缩放系数。
 
-When you scale a parent widget, all its child widgets are scaled accordingly.
+当你缩放一个控件时，它的所有子控件也会随着比例一起缩放。
+
 <div class="lefthighlight">
 {% prettify css %}
 <div class="greybox">
@@ -407,22 +381,17 @@ var container = new Container( // gray box
 {% endprettify %}
 </div>
 
-### Applying a Linear Gradient
+### 应用线性渐变
 
-To apply a linear gradient to a widget's background, nest it in a
-[Container](https://docs.flutter.io/flutter/widgets/Container-class.html) widget.
-Then use the Container widget’s ```decoration``` property to create a [BoxDecoration](https://docs.flutter.io/flutter/painting/BoxDecoration-class.html)
-object, and use BoxDecoration's ```gradient``` property to transform the background
-fill.
+如果想在控件的背景使用线性渐变，可以将该控件放到 [Container](https://docs.flutter.io/flutter/widgets/Container-class.html) 控件中，然后在Container的 ```decoration``` 属性上创建一个 [BoxDecoration](https://docs.flutter.io/flutter/painting/BoxDecoration-class.html) 对象，再设置BoxDecoration的 ```gradient``` 属性就可以改变背景颜色填充。
 
-The gradient “angle” is based on the Alignment (x, y) values:
+而渐变的角度取决于 Aligment(x,y) 的值:
+* 如果开始和结束的x值是相等的，那么渐变角度是垂直的。
+* 如果开始和结束的y值是相等的，那么渐变角度是水平的。
 
-* If the beginning and ending x values are equal, the gradient is vertical
-(0° | 180°).
-* If the beginning and ending y values are equal, the gradient is horizontal
-(90° | 270°).
+PS: 这里可以看作开始和结束两点连成直线的角度和方向就是渐变的角度和方向
 
-#### Vertical Gradient
+#### 垂直渐变
 <div class="lefthighlight">
 {% prettify css %}
 <div class="greybox">
@@ -476,7 +445,7 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-#### Horizontal Gradient
+#### 水平渐变
 <div class="lefthighlight">
 {% prettify css %}
 <div class="greybox">
@@ -530,14 +499,13 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-## Manipulating Shapes
-The following examples show how to make and customize shapes.
+## 改变形状
 
-### Rounding Corners
-To round the corners of a rectangular shape, use the ```borderRadius``` property of a
-[BoxDecoration](https://docs.flutter.io/flutter/painting/BoxDecoration-class.html)
-object. Create a new [BorderRadius](https://docs.flutter.io/flutter/painting/BorderRadius-class.html)
-object that specifies the radii for rounding each corner.
+下面的示例展示如何制作和自定义不同的形状。
+
+### 圆角
+如果想让一个矩形四个角都变成圆角，那么可以在 [BoxDecoration](https://docs.flutter.io/flutter/painting/BoxDecoration-class.html) 的 ```borderRadius``` 属性上，创建一个 [BorderRadius](https://docs.flutter.io/flutter/painting/BorderRadius-class.html) 对象，就可以在该对象上为指定圆角的半径。
+
 <div class="lefthighlight">
 {% prettify css %}
 <div class="greybox">
@@ -588,17 +556,12 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-### Adding Box Shadows
-In CSS you can specify shadow offset and blur in shorthand, using the box-shadow
-property. This example shows two box shadows, with properties:
+### 添加阴影效果
+在 CSS 中，你可以用简写的方式在box-shadow属性上去定义阴影的偏移和模糊，下面的例子展示了两种阴影效果和它们的属性：
 *  ```xOffset: 0px, yOffset: 2px, blur: 4px, color: black @80% alpha```
 *  ```xOffset: 0px, yOffset: 06x, blur: 20px, color: black @50% alpha```.
 
-In Flutter, each property and value is specified separately. Use the ```boxShadow```
-property of BoxDecoration to create a list of [BoxShadow](https://docs.flutter.io/flutter/painting/BoxShadow-class.html)
-widgets. You can define one or multiple BoxShadow widgets, which can be stacked
-to customize the shadow depth, color, etc.
-
+而在 Flutter 中，每个属性和值都需要分别去指定。在 BoxDecoration 的 ```boxShadow``` 上创建一个 [BoxShadow](https://docs.flutter.io/flutter/painting/BoxShadow-class.html) 控件列表，这些控件可以叠加来定制阴影的深度，颜色等等
 
 <div class="lefthighlight">
 {% prettify css %}
@@ -663,14 +626,11 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-### Making Circles and Ellipses
-Making a circle in CSS requires a workaround of applying a border-radius of
-50% to all four sides of a rectangle.
+### 制作圆形和椭圆形
 
-While this approach is supported with the ```borderRadius``` property of
-[BoxDecoration](https://docs.flutter.io/flutter/painting/BoxDecoration-class.html),
-Flutter provides a ```shape``` property with [BoxShape enum](https://docs.flutter.io/flutter/painting/BoxShape-class.html)
-for this purpose.
+在CSS中制作一个圆形，只需要使用border-radius属性设置为50%即可。
+
+这种方式也被 [BoxDecoration](https://docs.flutter.io/flutter/painting/BoxDecoration-class.html) 的 ```borderRadius``` 属性所支持，而Flutter也提供一个可以指定为 [BoxShape enum](https://docs.flutter.io/flutter/painting/BoxShape-class.html) 的  ```shape``` 属性来实现这种效果。
 
 <div class="lefthighlight">
 {% prettify css %}
@@ -726,22 +686,13 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-## Manipulating Text
-The following examples show how to specify fonts and other text attributes. They
-also show how to transform text strings, customize spacing, and create excerpts.
+## 操作文本
+下面的示例展示如何定义字体和其他文本属性，它们同样会展示如何变换字符串，自定义间距和创建摘录。
 
+### 调整文本间距
+在 CSS 中你可以使用 letter-spacing 和 word-spacing 属性设置一个长度值，从而指定每个字符或者每个单词间的间距，而这些属性中使用长度的单位可以是px, pt, cm, em等等。
 
-### Adjusting Text Spacing
-
-In CSS you specify the amount of white space between each letter or word by
-giving a length value for the letter-spacing and word-spacing properties,
-respectively. The amount of space can be in px, pt, cm, em, etc.
-
-In Flutter, you specify white space as logical pixels (negative values are allowed)
-for the ```letterSpacing``` and wordSpacing ```properties``` of a
-[TextStyle](https://docs.flutter.io/flutter/painting/TextStyle-class.html)
-child of a Text widget.
-
+在 Flutter 中，你可以使用逻辑像素（logical pixels）在 [TextStyle](https://docs.flutter.io/flutter/painting/TextStyle-class.html) 的 ```letterSpacing``` 和 ```wordSpacing``` 属性上来定义间距（负值也是允许的）。
 
 <div class="lefthighlight">
 {% prettify css %}
@@ -795,13 +746,10 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-### Transforming Text
-In HTML/CSS, you perform simple case transformations using the text-transform
-property.
+### 变换文本
+在 HTML/CSS 中，你可以使用 text-transform 属性执行简单的变换。
 
-In Flutter, you transform the contents of a Text widget using the methods and
-operators of the [String class](https://docs.flutter.io/flutter/dart-core/String-class.html)
-in the dart:core library.
+在 Flutter 中，你可以使用 [String class](https://docs.flutter.io/flutter/dart-core/String-class.html) 的方法和操作符来变换 Text 控件的内容。
 <div class="lefthighlight">
 {% prettify css%}
 <div class="greybox">
@@ -850,20 +798,10 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-### Making Inline Formatting Changes
+### 修改行内文本格式
+一个 [Text](https://docs.flutter.io/flutter/widgets/Text-class.html) 控件能够显示相同格式的文本，如果希望能够以不同的样式来显示文本，那么可以使用 [RichText](https://docs.flutter.io/flutter/widgets/RichText-class.html) 控件。该控件的 ```text``` 属性能够定义一个或者多个能够自定义样式的 [TextSpan](https://docs.flutter.io/flutter/painting/TextSpan-class.html) 控件。
 
-A [Text](https://docs.flutter.io/flutter/widgets/Text-class.html) widget lets
-you display text with the same formatting characteristics. To
-display text that uses multiple styles (in this example, a single word with
-emphasis), use a [RichText](https://docs.flutter.io/flutter/widgets/RichText-class.html)
-widget instead. Its ```text``` property can specify one or more
-[TextSpan](https://docs.flutter.io/flutter/painting/TextSpan-class.html) widgets
-that can be individually styled.
-
-In the following example, "Lorem" is in a TextSpan widget with the default
-(inherited) text styling, and "ipsum" is in a separate TextSpan with custom
-styling.
-
+在下面的示例中，"Lorem" 是一个继承默认文本样式的 TestSpan 控件，而 "ipsum" 则是一个自定义样式的TextSpan控件。
 
 <div class="lefthighlight">
 {% prettify css %}
@@ -927,15 +865,10 @@ var container = new Container( // grey box
 {% endprettify %}
 </div>
 
-### Creating Text Excerpts
+### 创建文本摘录
+一段摘录一般显示段落中文本的初始行，并且通常使用省略号来处理溢出文本。在 HTML/CSS 中，摘录不可以超过一行，如果需要截断成多行则需要利用 JavaScript 代码操作。
 
-An excerpt displays the initial line(s) of text in a paragraph, and handles the
-overflow text, often using an ellipsis. In HTML/CSS an excerpt can be no longer
-than one line. Truncating after multiple lines requires some JavaScript code.
-
-In Flutter, use the ```maxLines``` property of a [Text](https://docs.flutter.io/flutter/widgets/Text-class.html)
-widget to specify the number of lines to include in the excerpt, and the
-```overflow``` property for handling overflow text.
+在 Flutter 中，可以使用 [Text](https://docs.flutter.io/flutter/widgets/Text-class.html) 控件的 ```maxLines``` 属性去定义摘录的行数，然后使用 ```overflow``` 属性去处理文本溢出。
 
 <div class="lefthighlight">
 {% prettify css %}
