@@ -1,8 +1,8 @@
-## System requirements
+## 系统要求
 
-To install and run Flutter, your development environment must meet these minimum requirements:
+安装并运行 Flutter ，你的开发环境必须满足这些最低要求：
 
-* **Operating Systems**: macOS (64-bit)
-* **Disk Space**: 700 MB (does not include disk space for Xcode or Android Studio).
-* **Tools**: Flutter depends on these command-line tools being available in your environment.
-  * `bash`, `mkdir`, `rm`, `git`, `curl`, `unzip`, `which`
+* **操作系统**：macOS （64-bit）。
+* **磁盘空间**： 700 MB （不包括 Xcode 和 Android Studio 的磁盘空间）。
+* **工具**：Flutter 依赖你环境中可用的这些命令行工具。
+  * `bash`， `mkdir`，`rm`，`git`， `curl`，`unzip`，`which`
