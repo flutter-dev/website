@@ -212,7 +212,7 @@ flutter:
 在应用程序加载时，Flutter采用了和原生平台一样的绘制启动界面机制。启动界面一直持续到Flutter渲染完第一个界面。
 
 <aside class="alert alert-info" markdown="1">
-**Note:** 这意味着如果不在 `void main()` 中调用[runApp](https://docs.flutter.io/flutter/widgets/runApp.html)(准确来说是，如果不在 [`window.onDrawFrame`](https://docs.flutter.io/flutter/dart-ui/Window/onDrawFrame.html)响应之后调用[`window.render`](https://docs.flutter.io/flutter/dart-ui/Window/render.html))则APP会一直显示启动界面
+**Note:** 这意味着如果不在 `void main()` 中调用[runApp](https://docs.flutter.io/flutter/widgets/runApp.html) (准确来说是，如果不在  [`window.onDrawFrame`](https://docs.flutter.io/flutter/dart-ui/Window/onDrawFrame.html) 响应之后调用 [`window.render`](https://docs.flutter.io/flutter/dart-ui/Window/render.html) )，则APP会一直显示启动界面
 </aside>
 
 #### Android
