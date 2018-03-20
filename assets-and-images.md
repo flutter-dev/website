@@ -91,14 +91,14 @@ Flutter可以根据当前的设备像素比来加载分辨率合适的图像。
 
 #### 声名带有分辨率的图像资源 {#resolution-aware}
 
-[`AssetImage`](https://docs.flutter.io/flutter/painting/AssetImage-class.html)对象知道怎样根据当前的[device pixel ratio](https://docs.flutter.io/flutter/dart-ui/Window/devicePixelRatio.html)来匹配最合适的图像。为了让这个对象自动找到合适的图像，应该使用特定的目录结构来分配资源：
+[`AssetImage`](https://docs.flutter.io/flutter/painting/AssetImage-class.html)对象知道怎样根据当前的[`device pixel ratio`](https://docs.flutter.io/flutter/dart-ui/Window/devicePixelRatio.html)来匹配最合适的图像。为了让这个对象自动找到合适的图像，应该使用特定的目录结构来分配资源：
 
 * .../image.png
 * .../Mx/image.png
 * .../Nx/image.png
 * ...etc.
 
-_M_ and _N_ 用来标识图像的设备像素比，
+_M_ 和 _N_ 用来标识图像的设备像素比，
 
 主资源被默认为1.0的设备像素比，举个例子，下面的目录结构列出了多个名为 `my_icon.png` 的图像:
 
