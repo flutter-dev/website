@@ -194,7 +194,9 @@ flutter:
 ![Android icon location](/images/assets-and-images/android-icon-path.png)
 
 <aside class="alert alert-info" markdown="1">
-**Note:** 如果想重命名图片名，那么也必须修改 `AndroidManifest.xml` 文件 `<application>` 节点中的 `android:icon` 属性。
+**Note:** 
+
+如果想重命名图片名，那么也必须修改 `AndroidManifest.xml` 文件 `<application>` 节点中的 `android:icon` 属性。
 </aside>
 
 #### iOS
