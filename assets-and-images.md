@@ -148,7 +148,7 @@ Widget build(BuildContext context) {
 * .../icons/2.0x/heart.png
 * ...etc.
 
-然后，使用以下代码来加载图片:
+那么，可以使用以下代码来加载图片:
 
 <!-- skip -->
 ```dart
