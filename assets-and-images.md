@@ -116,7 +116,7 @@ _M_ 和 _N_ 用来标识图像的设备像素比，
 
 可以在 build 方法中使用[`AssetImage`](https://docs.flutter.io/flutter/painting/AssetImage-class.html)组件来加载图像
 
-举个例子，可以通过以下放来来加载一个背景图片：
+举个例子，可以通过以下方法来加载一个背景图片：
 
 ```dart
 Widget build(BuildContext context) {
