@@ -14,9 +14,9 @@ Flutter 应用程序是由代码和资源构建而成的。资源是应用程序
 
 ## 具体说明
 
-Flutter 应用程序使用项目根目录下的 [`pubspec.yaml`](https://www.dartlang.org/tools/pub/pubspec) 文件,来定义 APP 需要使用的资源。
+Flutter 应用程序使用项目根目录下的 [`pubspec.yaml`](https://www.dartlang.org/tools/pub/pubspec) 文件，来定义 APP 需要使用的资源。
 
-如下所示:
+如下所示：
 
 ```yaml
 flutter:
