@@ -10,8 +10,7 @@ permalink: /assets-and-images/
 
 ## 介绍
 
-Flutter应用程序是由代码和资源构建而成的。资源是应用程序需要用到的文件。静态文本文件(如:JSON文件)、配置文件、图标和图像(包括JPEG, WebP, GIF, 动画， 
-WebP/GIF, PNG, BMP, 和 WBMP)都可以作为资源使用。
+Flutter应用程序是由代码和资源构建而成的。资源是应用程序需要用到的文件。静态文本文件(如:JSON文件)、配置文件、图标和图像(包括JPEG, WebP, GIF, 动画， WebP/GIF, PNG, BMP, 和 WBMP)都可以作为资源使用。
 
 ## 具体说明
 
