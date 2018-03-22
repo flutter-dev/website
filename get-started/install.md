@@ -1,18 +1,17 @@
 ---
 layout: page
-title: "Get Started: Install"
+title: "安装 Flutter"
 permalink: /get-started/install/
 ---
 
-Please select the operating system on which you are installing Flutter:
+选择你要安装 Flutter 的操作系统:
 
 <div class="homepage__button_row">
-  <a href="/setup-windows" class="get-started-button">Install on Windows</a>
-  <a href="/setup-macos" class="get-started-button">Install on macOS</a>
-  <a href="/setup-linux" class="get-started-button">Install on Linux</a>
+  <a href="/setup-windows" class="get-started-button">Windows</a>
+  <a href="/setup-macos" class="get-started-button">macOS</a>
+  <a href="/setup-linux" class="get-started-button">Linux</a>
 </div>
 
-{% include note.html content="_If you're in China, please read
-[this wiki article](https://github.com/flutter/flutter/wiki/Using-Flutter-in-China)
-first_." 
+{% include note.html content="_如果你是中国大陆用户，请先阅读此文
+[this wiki article](https://github.com/flutter/flutter/wiki/Using-Flutter-in-China)_。" 
 %}

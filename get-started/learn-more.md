@@ -1,29 +1,28 @@
 ---
 layout: page
-title: "Get Started: Learn More"
+title: "开始使用: 学习更多"
 permalink: /get-started/learn-more/
 ---
-* Learn more about the Flutter framework
+* 了解关于 Flutter 框架的更多知识
 
 {% comment %}
 Once the "Flutter for React" doc (etc) are done, add here.
 {% endcomment %}
 
-  * [Building Layouts in Flutter](/tutorials/layout/) tutorial
-  * [Add Interactivity](/tutorials/interactive/) tutorial
-  * [A Tour of the Flutter Widget Framework](/widgets-intro/)
-  * [Flutter for Android Developers](/flutter-for-android/)
+  * [在 Flutter 中构建布局](/tutorials/layout/) 
+  * [添加交互](/tutorials/interactive/) 
+  * [Flutter Widget 框架之旅](/widgets-intro/)
+  * [Flutter 的 Android 开发者参考](/flutter-for-android/)
   
   
-* Other resources
+* 其他资源
 
-  * [Flutter Cookbook](/cookbook/)
-  * [From Java to Dart](https://codelabs.developers.google.com/codelabs/from-java-to-dart/#0) codelab
-  * [Bootstrap into Dart: learn more about the language](/bootstrap-into-dart/)
+  * [Flutter 手册](/cookbook/)
+  * [从 Java 到 Dart 手册](https://codelabs.developers.google.com/codelabs/from-java-to-dart/#0) 
+  * [引入 Dart： 学习关于这门语言更多的知识](/bootstrap-into-dart/)
 
-Please reach out to us at our [mailing list][mailinglist]. We'd love
-to hear from you!
+请通过 [邮件列表]与我们联系。我们很乐意听取您的意见！
 
-Happy Fluttering!
+祝使用愉快!
 
-[mailinglist]: mailto:flutter-dev@googlegroups.com
+[邮件列表]: mailto:flutter-dev@googlegroups.com
