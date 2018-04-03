@@ -280,7 +280,7 @@ class MyApp extends StatelessWidget {
 
 State<em>less</em> widgets 是不可改变的，这意味着它们的属性不能改变&mdash;&mdash;所有的值都是 final 的。
 
-State<em>ful</em>widget 在其生命周期保持的状态可能会变化，实现一个有状态的 widget 至少需要两个类： 1)一个 StatefulWidges 类，这个类创建了一个 2) State 类的实例。StatefulWidget 类本身是不可变的，但 State 类可存在于 widget 的整个生命周期中。
+State<em>ful</em>widget 在其生命周期保持的状态可能会变化，实现一个有状态的 widget 至少需要两个类：StatefulWidgets类和State类，其中StatefulWidgets类创建了一个State类的实例。StatefulWidget类本身是不可变的，但State类可存在于Widget的整个生命周期中。
 
 在这一步，将添加一个有状态的 RandomWords widget ，它可以创建其 State 类 RandomWordsState 。 State 类会为 widget 保存被推荐和被收藏的词组。
 
