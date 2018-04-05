@@ -1,19 +1,18 @@
 ---
 layout: page
-title: Making HTTP Networking Requests in Flutter
+title: 使用Flutter发起网络请求
 permalink: /networking/
 ---
 
-This page describes how to make HTTP networking requests in Flutter. For
-sockets, see [dart:io][dartio].
+本文介绍了如何使用Flutter发起网络请求，请查阅 [dart:io][dartio]。
 
 * TOC Placeholder
 {:toc}
 
-## Making HTTP requests
+## 发起HTTP请求
 
-The core http support is in [`dart:io`][dartio], so to create an HTTP [Client][client]
-we need to add an import:
+核心HTTP的接口支持位于 [`dart:io`][dartio]，所以为了创建一个 HTTP [Client][client]
+我们需要引入以下代码：
 <!-- skip -->
 ```dart
 import 'dart:io';
@@ -21,26 +20,23 @@ import 'dart:io';
 var httpClient = new HttpClient();
 ```
 
-The client supports common HTTP operations, such as [`GET`][get],
-[`POST`][post], [`PUT`][put], [`DELETE`][delete].  
+客户端支持常见的HTTP操作，例如 [`GET`][get]，
+[`POST`][post]，[`PUT`][put]，[`DELETE`][delete]。
 
-## Dealing with asynchronousy
+## 异步处理
 
-Note that the HTTP APIs use [Dart
-Futures](https://www.dartlang.org/tutorials/language/futures) in the return
-values. We recommend using the API calls with the `async`/`await` syntax.
+注意到HTTP接口在返回值中使用 [Dart
+Futures](https://www.dartlang.org/tutorials/language/futures)。我们推荐在调用接口的时候使用 `async`/`await` 语法。
 
-The networking calls generally follow a stepped approach:
+网络请求一般遵循以下几个步骤：
 
-1. Create the client.
-2. Construct the Uri.
-3. Invoke the operation, and await the request object. Optionally, configure the
-   headers and body of the request.
-4. Close the request, and await the response.
-5. Decode the response.
+1. 创建 client。
+2. 构造 Uri。
+3. 唤起操作，使用 await 等待请求。（可选）配置请求头和请求体。
+4. 关闭请求，使用 await 等待响应。
+5. 解码响应对象。
 
-Several of these steps use Future based APIs. Sample APIs calls for each step
-above are:
+这些步骤使用基于Future的接口，以上几步的接口调用示例代码：
 
 <!-- skip -->
 ```dart
@@ -54,15 +50,15 @@ get() async {
 }
 ```
 
-See 'Example' below for a full code sample.
+完整的示例代码参见下面的 'Example'。
 
-## Decoding and encoding JSON
+## JSON的编码与解码
 
-Simple decoding and encoding of JSON is possible using the
+简单的JSON编解码可以使用
 [`dart:convert`](https://docs.flutter.io/flutter/dart-convert/dart-convert-library.html)
-library. For additional JSON documentation, see [JSON and serialization](/json/).
+库。更多JSON相关文档，请参阅 [JSON and serialization](/json/).
 
-To decode a simple JSON string and parse the response into a Map:
+解码一个简单的JSON字符串并将响应对象解析为一个字典：
 
 <!-- skip -->
 ```dart
@@ -71,25 +67,23 @@ Map data = JSON.decode(responseBody);
 int barValue = data[1]['bar']; // barValue is set to 499
 ```
 
-To encode simple JSON, pass a simple value (string, boolean, or number literal), or a
-Map, List, or List of Maps containing simple values, to the `encode` method:
+编码简单的JSON对象，将简单的值（如字符串，布尔值，或者 数值类型），字典，数组，或者包含简单值的字典组成的数组传入 `encode` 方法：
 
 <!-- skip -->
 ```dart
 String encodedString = JSON.encode([1, 2, { 'a': null }]);
 ```
 
-## Example: decoding JSON from HTTPS GET
+## 示例: 通过GET请求解析JSON
 
-The following example shows how to decode JSON from an HTTPS GET call in a Flutter app.
+以下示例代码展示在Flutter应用中如何从HTTPS个GET请求中解码JSON。
 
-It calls the [httpbin.com](https://httpbin.com) web service testing API,
-which then responds with your local IP address. Note that secure
-networking (HTTPS) is used.
+使用 [httpbin.com](https://httpbin.com) 的测试API服务
+并返回你的本地IP地址。 注意使用安全的网络（HTTPS）。
 
-1. Create a new flutter app with `flutter create`.
+1. 创建一个flutter应用 `flutter create`。
 
-1. Replace the contents of `lib/main.dart` with the following:
+1. 将 `lib/main.dart` 的内容替换为：
 
 ```dart
 import 'dart:convert';
@@ -174,9 +168,9 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
-## API docs
+## API 文档
 
-For full API docs, see:
+更多文档，请参阅：
 
   * [library `dart:io`][dartio]
   * [library `dart:convert`][convert]
