@@ -4,14 +4,14 @@ title: 使用Flutter发起网络请求
 permalink: /networking/
 ---
 
-本文介绍了如何使用Flutter发起网络请求，请查阅 [dart:io][dartio]。
+本文介绍了如何使用Flutter发起网络请求，了解sockets，请查阅 [dart:io][dartio]。
 
 * TOC Placeholder
 {:toc}
 
 ## 发起HTTP请求
 
-核心HTTP的接口支持位于 [`dart:io`][dartio]，所以为了创建一个 HTTP [Client][client]
+HTTP核心接口的支持位于 [`dart:io`][dartio]，所以为了创建一个 HTTP [Client][client]
 我们需要引入以下代码：
 <!-- skip -->
 ```dart
