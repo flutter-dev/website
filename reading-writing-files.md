@@ -1,36 +1,32 @@
 ---
 layout: page
-title: Reading and Writing Files
+title: 文件的读写
 
 permalink: /reading-writing-files/
 ---
 
-This guide describes how to read and write files in Flutter by using the
-[`PathProvider`](https://pub.dartlang.org/packages/path_provider) plugin and
-Dart's [`IO`](https://api.dartlang.org/stable/dart-io/dart-io-library.html) library.
+这篇文章介绍了在 Flutter 中如何使用 [`PathProvider`](https://pub.dartlang.org/packages/path_provider) 插件和 Dart's 的 [`IO`](https://api.dartlang.org/stable/dart-io/dart-io-library.html) 库来读写文件。
 
 * TOC
 {:toc}
 
-## Introduction
-The [`PathProvider`](https://pub.dartlang.org/packages/path_provider) plugin provides a platform-agnostic way to
-access commonly used locations on the device's filesystem. The class currently supports access to two filesystem locations:
+## 简介
+[`PathProvider`](https://pub.dartlang.org/packages/path_provider) 插件提供了访问设备上文件系统的常用路径的与平台无关的方法:
 
-+ **Temporary directory:** A temporary directory (cache) that the system can clear at any time. On iOS, this corresponds to the value that [`NSTemporaryDirectory()`](https://developer.apple.com/reference/foundation/1409211-nstemporarydirectory) returns. On Android, this is the value that [`getCacheDir()`](https://developer.android.com/reference/android/content/Context.html#getCacheDir()) returns.
-+ **Documents directory:** A directory for the app to store files that only it can access. The system clears the directory only when the app is deleted. On iOS, this corresponds to `NSDocumentDirectory`. On Android, this is the `AppData` directory.
++ **Temporary directory:** 系统可能在任意时间清空的临时目录 (缓存)。在 iOS 系统上，相当于 [`NSTemporaryDirectory()`](https://developer.apple.com/reference/foundation/1409211-nstemporarydirectory) 返回的值。在 Android 系统上，相当于 [`getCacheDir()`](https://developer.android.com/reference/android/content/Context.html#getCacheDir()) 返回的值。
++ **Documents directory:** 用于存储只有应用自己可以访问的文件。只有应用被删掉的时候系统才会清空目录。在 iOS 系统上, 相当于 `NSDocumentDirectory`。在 Android 系统上，相当于 `AppData`。
 
-Once your Flutter app has a reference to a file location, you can use the [dart:io](https://api.dartlang.org/stable/dart-io/dart-io-library.html) APIs to perform read/write operations to the filesystem. For more information about working on files and directories using Dart, see this [overview](https://www.dartlang.org/articles/dart-vm/io) and [these examples](https://www.dartlang.org/dart-vm/dart-by-example#files-directories-and-symlinks).
+一旦你的 Flutter 应用 引用了文件路径，你就可以使用 [dart:io](https://api.dartlang.org/stable/dart-io/dart-io-library.html) 的接口对文件系统执行读写操作。更多关于使用 Dart 对文件和目录进行操作的信息，请参阅 [overview](https://www.dartlang.org/articles/dart-vm/io) 和 [these examples](https://www.dartlang.org/dart-vm/dart-by-example#files-directories-and-symlinks).
 
-## Example of reading and writing to a file
+## 读写文件的示例
 
-The following example shows how to modify the default app created by `flutter create`, so that
-the app persists the number of button presses across relaunches:
+下面的例子展示了如何修改通过 `flutter create` 默认创建的应用，进而持久化多次重启应用之后按钮点击的次数:
 
-1. Create a new Flutter project with `flutter create` or using File > New Project in IntelliJ.
+1. 通过 `flutter create` 创建新的 Flutter 工程或者在 IntelliJ 中使用 文件 > 新建工程。
 
-1. [Declare a dependency](https://pub.dartlang.org/packages/path_provider#-installing-tab-) on the PathProvider plugin in `pubspec.yaml`
+1. 在 `pubspec.yaml`中对插件 PathProvider [声明依赖](https://pub.dartlang.org/packages/path_provider#-installing-tab-)。
 
-1. Replace the contents of `lib/main.dart` with the following:
+1. 替换 `lib/main.dart` 为以下代码:
 
 ```dart
 import 'dart:io';
