@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 使用Flutter发起网络请求
+title: 使用 Flutter 发起网络请求
 permalink: /networking/
 ---
 
@@ -11,7 +11,7 @@ permalink: /networking/
 
 ## 发起 HTTP 请求
 
-HTTP核心接口的支持位于 [`dart:io`][dartio]，所以为了创建一个 HTTP [Client][client]
+HTTP 核心接口的支持位于 [`dart:io`][dartio]，所以为了创建一个 HTTP [Client][client]
 我们需要引入以下代码：
 
 <!-- skip -->
@@ -21,12 +21,12 @@ import 'dart:io';
 var httpClient = new HttpClient();
 ```
 
-客户端支持常见的HTTP操作，例如 [`GET`][get]，
+客户端支持常见的 HTTP 操作，例如 [`GET`][get]，
 [`POST`][post]，[`PUT`][put]，[`DELETE`][delete]。
 
 ## 异步处理
 
-注意到HTTP接口在返回值中使用 [Dart
+注意到 HTTP 相关接口在返回值中使用 [Dart
 Futures](https://www.dartlang.org/tutorials/language/futures)。我们推荐在调用接口的时候使用 `async`/`await` 语法。
 
 网络请求一般遵循以下几个步骤：
@@ -55,7 +55,7 @@ get() async {
 
 ## JSON 的编码与解码
 
-简单的JSON编解码可以使用
+简单的 JSON 编解码可以使用
 [`dart:convert`](https://docs.flutter.io/flutter/dart-convert/dart-convert-library.html)
 库。更多 JSON 相关文档，请参阅 [JSON and serialization](/json/).
 
@@ -77,10 +77,10 @@ String encodedString = JSON.encode([1, 2, { 'a': null }]);
 
 ## 示例: 通过 GET 请求解析 JSON
 
-以下示例代码展示在 Flutter 应用中如何从HTTPS个GET请求中解码JSON。
+以下示例代码展示在 Flutter 应用中如何从 HTTPS 的 GET 请求中解码 JSON。
 
 使用 [httpbin.com](https://httpbin.com) 的测试 API 服务
-并返回你的本地IP地址。 注意使用安全的网络（HTTPS）。
+并返回你的本地 IP 地址。 注意使用安全的网络（HTTPS）。
 
 1. 创建一个 flutter 应用 `flutter create`。
 
