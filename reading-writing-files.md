@@ -16,7 +16,7 @@ permalink: /reading-writing-files/
 + **Temporary directory:** 系统可能在任意时间清空的临时目录 (缓存)。在 iOS 系统上，相当于 [`NSTemporaryDirectory()`](https://developer.apple.com/reference/foundation/1409211-nstemporarydirectory) 返回的值。在 Android 系统上，相当于 [`getCacheDir()`](https://developer.android.com/reference/android/content/Context.html#getCacheDir()) 返回的值。
 + **Documents directory:** 用于存储只有应用自己可以访问的文件。只有应用被删掉的时候系统才会清空目录。在 iOS 系统上, 相当于 `NSDocumentDirectory`。在 Android 系统上，相当于 `AppData`。
 
-一旦你的 Flutter 应用 引用了文件路径，你就可以使用 [dart:io](https://api.dartlang.org/stable/dart-io/dart-io-library.html) 的接口对文件系统执行读写操作。更多关于使用 Dart 对文件和目录进行操作的信息，请参阅 [overview](https://www.dartlang.org/articles/dart-vm/io) 和 [these examples](https://www.dartlang.org/dart-vm/dart-by-example#files-directories-and-symlinks).
+一旦你的 Flutter 应用引用了文件路径，你就可以使用 [dart:io](https://api.dartlang.org/stable/dart-io/dart-io-library.html) 的接口对文件系统执行读写操作。更多关于使用 Dart 对文件和目录进行操作的信息，请参阅 [overview](https://www.dartlang.org/articles/dart-vm/io) 和 [these examples](https://www.dartlang.org/dart-vm/dart-by-example#files-directories-and-symlinks).
 
 ## 读写文件的示例
 
