@@ -154,12 +154,10 @@ String json = JSON.encode(user);
 
 ### 在项目中设置 json_serializable
 
-To include `json_serializable` in our project, we need one regular and two _dev
-dependencies_. In short, _dev dependencies_ are dependencies that are not
-included in our app source code.
+想要在我们的项目包含 `json_serializable` ，需要一个 regular 和两个 _dev
+dependencies_ 。简言之， _dev dependencies_ 就是那些不包含在应用源代码中的的依赖项。
 
-The latest versions of these required dependencies can be seen by following
-[this link](https://github.com/dart-lang/json_serializable/blob/master/example/pubspec.yaml).
+通过[链接](https://github.com/dart-lang/json_serializable/blob/master/example/pubspec.yaml)可以看到这些依赖项的最新版本。
 
 **pubspec.yaml**
 
@@ -174,13 +172,12 @@ dev_dependencies:
   json_serializable: ^0.3.2
 ```
 
-Run `flutter packages get` inside your project root folder (or click "Packages
-Get" in your editor) to make these new dependencies available in your project.
+在项目的根目录运行 `flutter packages get` (或者在编辑器中点击 "Packages
+Get") 可以使这些依赖作用于你的项目。
 
-### Creating model classes the json_serializable way
+### 用 json_serializable 的方法创建模型类
 
-Let's see how to convert our `User` class to a `json_serializable` one. For the
-sake of simplicity, we use the dumbed-down JSON model from the previous samples.
+让我们看下如何将我们的 `User` 类转化成一个 `json_serializable`。为了简单起见，我们使用了之前的样例中的 JSON 模型。
 
 **user.dart**
 
@@ -213,13 +210,9 @@ class User extends Object with _$[[highlight]]User[[/highlight]]SerializerMixin 
 }
 {% endprettify %}
 
-With this setup, the source code generator will generate code for serializing
-the `name` and `email` fields from JSON and back.
+有了设置，源代码生成器将从 JSON 中的 `name` 和 `email` 字段生成代码并返回。
 
-If needed, it is also easy to customize the naming strategy. For example, if the
-API we are working with returns objects with _snake\_case_, and we want to use
-_lowerCamelCase_ in our models, we can use the `@JsonKey` annotation with a name
-parameter:
+如果需要，也可以很方便的自定义命名策略。例如，如果我们想和  _snake\_case_ 返回的对象协作，并且我们想在模型中使用 _lowerCamelCase_ 命名，我们可以使用 `@JsonKey` 标注参数名:
 
 <!-- skip -->
 ```dart
@@ -229,43 +222,32 @@ parameter:
 final int registrationDateMillis;
 ```
 
-### Running the code generation utility
+### 运行代码生成工具
 
-When creating `json_serializable` classes the first time, you will get errors
-similar to the image below.
+当第一次创建 `json_serializable` 类的时候，你会收到与下面图片类似的错误。
 
 ![IDE warning when the generated code for a model class does not exist
 yet.](/images/json/ide_warning.png)
 
-These errors are entirely normal and are simply because the generated code for
-the model class does not exist yet. To resolve this, we must run the code
-generator that generates the serialization boilerplate for us.
+这些错误及其常见也很简单因为模型类的生成代码还不存在。要解决这个问题，我们必须运行代码生成器来为我们生成序列化模板代码。
 
-There are two ways of running the code generator.
+两种方法可以运行代码生成器。
 
-#### One-time code generation
+#### 一次性生成代码
 
-By running `flutter packages pub run build_runner build` in our project root, we
-can generate json serialization code for our models whenever needed. This
-triggers a one-time build which goes through our source files, picks the
-relevant ones and generates the necessary serialization code for them.
+在项目根目录运行 `flutter packages pub run build_runner build` ，我们就可以在任何需要的时候为我们的模型类生成 json 序列化代码。这个触发器一次性编译我们代码中相关的类并为他们生成必要的序列化代码。
 
-While this is pretty convenient, it would nice if we did not have to run the
-build manually every time we make changes in our model classes.
+这个相当的方便，如果我们不想每次在修改了模型类之后都手动编译，它会非常棒。
 
-#### Generating code continuously
+#### 持续地生成代码
 
-A _watcher_ can make our source code generation process more convenient. It
-watches changes in our project files and automatically builds the necessary
-files when needed. We can start the watcher by running `flutter packages pub run
-build_runner watch` in our project root.
+_watcher_  可以让我们的代码生成过程更加方便。它会监控我们项目文件的改变并在需要的时候自动编译那些必要的文件。我们可以在项目根目录下运行 `flutter packages pub run build_runner watch` 来启动 watcher.
 
-It is safe to start the watcher once and leave it running in the background.
+一次启动 watcher 并让它运行与后台是安全的.
 
-### Consuming json_serializable models
+### 使用 json_serializable 模型类
 
-To deserialize a JSON string `json_serializable` way, we do not have actually to
-make any changes to our previous code.
+使用 `json_serializable` 的方法反序列化 JSON 字符串，我们不需要对之前的代码做任何改动。
 
 <!-- skip -->
 ```dart
@@ -273,21 +255,16 @@ Map userMap = JSON.decode(json);
 var user = new User.fromJson(userMap);
 ```
 
-Same goes for serialization. The calling API is the same as before.
+同样的对于序列化。和之前一样的调用 API。
 
 <!-- skip -->
 ```dart
 String json = JSON.encode(user);
 ```
 
-With `json_serializable`, we can forget any manual JSON serialization in the
-`User` class. The source code generator creates a file called `user.g.dart`,
-which has all the necessary serialization logic. Now we do not necessarily have
-to write automated tests to be sure that the serialization works - it is now
-_the library's responsibility_ to make sure the serialization works
-appropriately.
+使用 `json_serializable`，我们可以忘了在 `User` 类中任何手动调用 JSON 序列化的代码。代码生成器会创建一个叫做 `user.g.dart` 的文件，它包含了所有必要的序列化逻辑。现在我们不必编写自动化测试来确保序列化能工作 - 现在由 _the library's responsibility_ 来确保序列化正常工作。
 
-## Further references
+## 更多相关文档
 
 * [JsonCodec documentation](https://api.dartlang.org/stable/1.24.3/dart-convert/JsonCodec-class.html)
 * [The json_serializable package in Pub](https://pub.dartlang.org/packages/json_serializable)
