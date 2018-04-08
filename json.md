@@ -13,7 +13,7 @@ permalink: /json/
 
 ## 哪一种 JSON 的序列化方法适合我？
 
-本文覆盖到了两种常见的使用 JSON 的策略：
+本文介绍了两种通用的使用 JSON 的策略：
 
 * 手动序列化和反序列化
 * 通过代码生成自动序列化和反序列化
@@ -22,11 +22,11 @@ permalink: /json/
 
 ### 小项目使用手动序列化
 
-手动序列化参考使用在 `dart:convert` 中的内置解码器。包括传入 JSON 原始字符串 给 `JSON.decode()` 方法，然后从 `Map<String, dynamic>` 中查询你需要的数据。没有额外的依赖和特别的设置过程，它可以很方便的快速验证想法。
+手动序列化是指使用在 `dart:convert` 中的内置解码器。包括传入 JSON 原始字符串给 `JSON.decode()` 方法，然后从 `Map<String, dynamic>` 中查询你需要的数据。它没有外部依赖或特定的设置过程，有助于目的的快速验证。
 
 当你的项目变得越来越大时，手动序列化变得不那么好用。手动编写序列化逻辑会变得更难管理并且容易出错。如果你编写了错误的代码而访问了一个不存在的 JSON 字段，代码会在运行时抛出错误。
 
-如果在你项目中的 JSON 模型不是很多并且期望快速验证想法，手动序列化会是你想要开始使用的方法。关于手动序列化的例子，[参阅这里](#manual-serialization).
+如果在你项目中的 JSON 模型不是很多并且期望快速验证目的，手动序列化会是你想要开始使用的方法。关于手动序列化的例子，[参阅这里](#manual-serialization).
 
 ### 在中大型项目中使用代码生成 
 
@@ -262,7 +262,7 @@ var user = new User.fromJson(userMap);
 String json = JSON.encode(user);
 ```
 
-使用 `json_serializable`，我们可以忘了在 `User` 类中任何手动调用 JSON 序列化的代码。代码生成器会创建一个叫做 `user.g.dart` 的文件，它包含了所有必要的序列化逻辑。现在我们不必编写自动化测试来确保序列化能工作 - 现在由 _the library's responsibility_ 来确保序列化正常工作。
+使用 `json_serializable`，我们可以忘了在 `User` 类中任何手动调用 JSON 序列化的代码。代码生成器会创建一个叫做 `user.g.dart` 的文件，它包含了所有必要的序列化逻辑。现在我们不必编写自动化测试来确保序列化能工作 - 现在由 _the library's responsibility_ 来确保序列化正常工作。 
 
 ## 更多相关文档
 
