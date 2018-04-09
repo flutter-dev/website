@@ -41,7 +41,7 @@ permalink: /json/
 
 答案是没有。
 
-这些库需要用到运行时的反射机制，而这在 Flutter 中是被禁用的。运行时反射干涉了 _tree shaking_，这是 Dart 已经支持了很长时间的东西。通过 tree shaking，我们可以在发布时“摆脱”一些无用的代码。这对于我们优化应用的大小有了重大意义。
+这些库需要用到运行时的反射机制，而这在 Flutter 中是被禁用的。运行时反射干涉了 _tree shaking_，这个特性 Dart 已经支持很久了。通过 tree shaking，我们可以在发布版本中“摆脱”一些无用的代码。这对于我们优化应用的大小有了重大意义。
 
 自从反射默认隐式调用所有代码，这让 tree
 shaking 变得困难。工具无法知道哪些部分在运行时未使用，以至于多余的代码很难被清理掉。在使用反射时应用大小不容易被优化。
@@ -52,7 +52,7 @@ shaking 变得困难。工具无法知道哪些部分在运行时未使用，以
 [dartson](https://pub.dartlang.org/packages/dartson) 使用了运行时反射，对于 Flutter 来说不适用。
 </aside>
 
-虽然我们不能配合 Flutter 使用运行时反射，取而代之，一些库给我们提供了基于代码生成的类似的使用简单的接口。关于这个方法更多的细节在 [code generation
+虽然我们不能在 Flutter 中使用运行时反射，取而代之，一些库给我们提供了类似的基于代码生成的简单接口。关于这个方法更多的细节在 [code generation
 libraries](#code-generation)。
 
 <a name="manual-serialization"></a>
@@ -69,7 +69,7 @@ libraries](#code-generation)。
 }
 ```
 
-通过 `dart:convert`，我们可以使用两种方法序列化这个 JSON 模型。让我们都看一下。
+通过 `dart:convert`，我们可以使用两种方法序列化这个 JSON 模型。让我们看一下。
 
 ### 内联序列化 JSON
 
@@ -91,12 +91,12 @@ print('We sent the verification link to ${user['email']}.');
 
 ### 在模型类内部序列化 JSON
 
-我们实际运用一下我们之前提到的问题通过引入一个叫做 `User` 的普通的模型类，我们拥有：
+通过引入一个叫做 `User` 的普通的模型类，我们实际运用一下我们之前提到的问题，我们拥有：
 
 * 一个 `User.fromJson` 构造器，用于从一个字典 数据结构构造一个新的 `User` 实例。
 * 一个 `toJson` 方法，用于将 `User` 的实例转化成一个字典。
 
-这个方法，_calling code_ 拥有类型安全，为 `name` and `email` 字段自动补全和编译时异常。 如果我们编码错误或者把当成来处理，应用不是在运行时崩溃，甚至都不能成功编译。
+这样，_调用代码_ 可以提供类型安全，为 `name` and `email` 字段自动补全和编译时异常。 如果我们编码错误或者把 `String` 当成 `int` 来处理，我们的应用程序将不会编译，而不是在运行时崩溃。
 
 **user.dart**
 
@@ -141,7 +141,7 @@ String json = JSON.encode(user);
 
 这样，调用代码就不用担心JSON序列化了。然而，模型类仍然需要。在应用的生产应用中，我们希望确保序列化工作正常。在实际应用中，`User.fromJson` 和 `User.toJson` 方法都需要适当的单元测试来验证正确的行为。
 
-而且，现实世界的场景通常不是那么简单。我们不大可能获取如此小的 JSON 响应对象。嵌套的JSON对象很常见。
+而且，现实世界的场景通常不是那么简单。我们不大可能获取如此小的 JSON 响应对象。嵌套的 JSON 对象很常见。
 
 如果有什么东西可以为我们处理好 JSON 序列化就太好了。幸运的是，确实有！
 
@@ -150,12 +150,12 @@ String json = JSON.encode(user);
 
 虽然还有一些其他的库可用，但是在本教程中，我们使用 [json_serializable package](https://pub.dartlang.org/packages/json_serializable)。这是一个自动化的源代码生成器，可以生成 JSON 序列化样板。
 
-由于序列化代码不再由我们手写和维护，所以我们尽量减少了JSON序列化在运行时发生异常的风险。
+由于序列化代码不再由我们手写和维护，所以我们尽量减少了 JSON 序列化在运行时发生异常的风险。
 
 ### 在项目中设置 json_serializable
 
 想要在我们的项目包含 `json_serializable` ，需要一个 regular 和两个 _dev
-dependencies_ 。简言之， _dev dependencies_ 就是那些不包含在应用源代码中的的依赖项。
+依赖_ 。简言之， _dev 依赖_ 就是那些不包含在应用源代码中的的依赖项。
 
 通过[链接](https://github.com/dart-lang/json_serializable/blob/master/example/pubspec.yaml)可以看到这些依赖项的最新版本。
 
@@ -175,7 +175,7 @@ dev_dependencies:
 在项目的根目录运行 `flutter packages get` (或者在编辑器中点击 "Packages
 Get") 可以使这些依赖作用于你的项目。
 
-### 用 json_serializable 的方法创建模型类
+### 创建模型类的 json_serializable 方式
 
 让我们看下如何将我们的 `User` 类转化成一个 `json_serializable`。为了简单起见，我们使用了之前的样例中的 JSON 模型。
 
@@ -210,9 +210,9 @@ class User extends Object with _$[[highlight]]User[[/highlight]]SerializerMixin 
 }
 {% endprettify %}
 
-有了设置，源代码生成器将从 JSON 中的 `name` 和 `email` 字段生成代码并返回。
+有了这个设置，源代码生成器将从 JSON 中的 `name` 和 `email` 字段生成代码。
 
-如果需要，也可以很方便的自定义命名策略。例如，如果我们想和  _snake\_case_ 返回的对象协作，并且我们想在模型中使用 _lowerCamelCase_ 命名，我们可以使用 `@JsonKey` 标注参数名:
+如果需要，也可以很方便的自定义命名策略。例如，如果我们接口返回的对象是  _snake\_case_ 命名方式，而我们想在模型中使用 _lowerCamelCase_ 命名，我们可以使用 `@JsonKey` 标注参数名:
 
 <!-- skip -->
 ```dart
@@ -237,13 +237,13 @@ yet.](/images/json/ide_warning.png)
 
 在项目根目录运行 `flutter packages pub run build_runner build` ，我们就可以在任何需要的时候为我们的模型类生成 json 序列化代码。这个触发器一次性编译我们代码中相关的类并为他们生成必要的序列化代码。
 
-这个相当的方便，如果我们不想每次在修改了模型类之后都手动编译，它会非常棒。
+虽然这非常方便，但如果我们每次在模型类中进行更改时都不需要手动地运行构建，那就更好了。
 
 #### 持续地生成代码
 
 _watcher_  可以让我们的代码生成过程更加方便。它会监控我们项目文件的改变并在需要的时候自动编译那些必要的文件。我们可以在项目根目录下运行 `flutter packages pub run build_runner watch` 来启动 watcher.
 
-一次启动 watcher 并让它运行与后台是安全的.
+启动 watcher 并让它在后台安全的运行.
 
 ### 使用 json_serializable 模型类
 
@@ -262,7 +262,7 @@ var user = new User.fromJson(userMap);
 String json = JSON.encode(user);
 ```
 
-使用 `json_serializable`，我们可以忘了在 `User` 类中任何手动调用 JSON 序列化的代码。代码生成器会创建一个叫做 `user.g.dart` 的文件，它包含了所有必要的序列化逻辑。现在我们不必编写自动化测试来确保序列化能工作 - 现在由 _the library's responsibility_ 来确保序列化正常工作。 
+使用 `json_serializable`，我们可以忘了在 `User` 类中任何手动调用 JSON 序列化的代码。代码生成器会创建一个叫做 `user.g.dart` 的文件，它包含了所有必要的序列化逻辑。现在我们不必编写自动化测试来确保序列化能工作 - 现在这是 _库的责任_。 
 
 ## 更多相关文档
 
