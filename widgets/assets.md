@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 资源、 图片、和图标部件（Widgets）
+title: 资源、 图片、和图标 Widgets
 
 permalink: widgets/assets/
 ---

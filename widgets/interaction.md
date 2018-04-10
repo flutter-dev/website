@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 可交互部件（Widgets）
+title: 可交互 Widgets
 
 permalink: widgets/interaction/
 ---

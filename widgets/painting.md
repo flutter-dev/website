@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 绘画和效果部件（Widgets）
+title: 绘画和效果 Widgets
 
 permalink: widgets/painting/
 ---

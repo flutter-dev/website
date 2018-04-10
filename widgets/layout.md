@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 布局部件（Widgets）
+title: 布局 Widgets
 
 permalink: widgets/layout/
 ---

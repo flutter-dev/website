@@ -4,9 +4,9 @@ title: Widget 目录
 permalink: /widgets/
 ---
 
-使用 Flutter 提供的视觉部件、结构部件、平台部件以及可交互的部件来加快创建一个漂亮的应用的进程。
+使用 Flutter 提供的视觉、结构、平台以及可交互的 Widgets 来更快的构建出一个美观的应用程序。
 
-<p>如果你想按照部件的分类来浏览这些部件，你可以在 <a href="/widgets/widgetindex/">Flutter部件索引页面</a> 看到所有的部件。</p>
+<p>除了按照分类来浏览这些 Widget，你也可以在 <a href="/widgets/widgetindex/">Flutter Widget 索引页面</a> 看到所有的 Widget。</p>
 
 <ul class="cards">
 {% for section in site.data.catalog.index %}

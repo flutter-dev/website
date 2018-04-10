@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 基础部件（Widgets）
+title: 基础 Widgets
 
 permalink: widgets/basics/
 ---

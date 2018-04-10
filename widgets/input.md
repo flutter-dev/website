@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 输入部件（Widgets）
+title: 输入 Widgets
 
 permalink: widgets/input/
 ---

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 样式部件（Widgets）
+title: 样式 Widgets
 
 permalink: widgets/styling/
 ---

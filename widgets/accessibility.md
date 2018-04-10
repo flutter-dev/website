@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 辅助性部件（Widgets）
+title: 辅助性 Widgets
 
 permalink: widgets/accessibility/
 ---
