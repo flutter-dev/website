@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Text Widgets
+title: 文本部件（Widgets）
 
 permalink: widgets/text/
 ---
-{% include catalogpage.html category="Text"%}      
+{% include catalogpage.html category="Text"%}

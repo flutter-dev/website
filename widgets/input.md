@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Input Widgets
+title: 输入部件（Widgets）
 
 permalink: widgets/input/
 ---
 
-{% include catalogpage.html category="Input"%}  
+{% include catalogpage.html category="Input"%}

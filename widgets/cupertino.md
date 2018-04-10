@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Cupertino (iOS-style) Widgets
+title: 库比蒂诺（iOS风格的）部件（Widgets）
 
 permalink: widgets/cupertino/
 ---
-{% include catalogpage.html category="Cupertino (iOS-style widgets)"%}  
+{% include catalogpage.html category="Cupertino (iOS-style widgets)"%}

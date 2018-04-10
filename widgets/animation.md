@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Animation and Motion Widgets
+title: 动画和运动部件（Widgets）
 
 permalink: widgets/animation/
 ---

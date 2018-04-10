@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Assets, Images, and Icon Widgets
+title: 资源、 图片、和图标部件（Widgets）
 
 permalink: widgets/assets/
 ---
-{% include catalogpage.html category="Assets, Images, and Icons"%}   
+{% include catalogpage.html category="Assets, Images, and Icons"%}

@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Interaction Model Widgets
+title: 可交互部件（Widgets）
 
 permalink: widgets/interaction/
 ---
-{% include catalogpage.html category="Interaction Models"%}  
+{% include catalogpage.html category="Interaction Models"%}
