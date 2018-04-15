@@ -1,13 +1,13 @@
 [
   {
-    "name": "Basics",
-    "description": "Widgets you absolutely need to know before building your first Flutter app.",
+    "name": "基础 Widgets",
+    "description": "在你开始构建你的第一个 Flutter 应用程序之前，这些 Widgets 是你一定需要了解的。",
     "priority": "high",
     "id":"basics"
   },
   {
-    "name": "Material Components",
-    "description": "Visual, behavioral, and motion-rich widgets implementing the <a href=\"https://material.io/guidelines/material-design/introduction.html\">Material Design guidelines</a>.",
+    "name": "Material Design 风格的组件",
+    "description": "在视觉，行为以及运动细节上都遵循谷歌 <a href=\"https://material.io/guidelines/material-design/introduction.html\">Material Design 设计原则</a> 的 Widgets。",
     "subcategories": [
       {
         "name": "App structure and navigation"
@@ -32,21 +32,21 @@
     "id":"material"
   },
   {
-    "name": "Cupertino (iOS-style widgets)",
-    "description": "Beautiful and high-fidelity widgets for current iOS design language.",
+    "name": "库比蒂诺 (iOS风格的 Widgets)",
+    "description": "符合当前 iOS 设计语言，美观、高度还原的 Widgets。",
     "id":"cupertino"
   },
   {
-    "name": "Layout",
-    "description": "Arrange other widgets columns, rows, grids, and many other layouts.",
+    "name": "布局",
+    "description": "将各种各样的 Widgets 进行排布，例如：列布局(columns)，行布局(rows)，表格布局(grids)等。",
     "subcategories": [
       {
-        "name": "Single-child layout widgets",
-        "description": "These widgets take a single child and manipulate the layout of the child."
+        "name": "只包含单个子部件的布局 widgets",
+        "description": "这些 widgets 只包含一个子部件，对这一个部件进行合理的摆放。"
       },
       {
-        "name": "Multi-child layout widgets",
-        "description":"These widgets take multiple children and arrange them in different ways."
+        "name": "含有多个子部件的布局 widgets",
+        "description":"这些 widgets 包含多个子部件，可以对这些子部件按照不同的规则进行摆放。"
       },
       {
         "name": "Layout helpers"
@@ -55,23 +55,23 @@
     "id":"layout"
   },
   {
-    "name": "Text",
-    "description": "Display and style text.",
+    "name": "文本",
+    "description": "显示以及美化文本。",
     "id":"text"
   },
   {
-    "name": "Assets, Images, and Icons",
-    "description": "Manage assets, display images, and show icons.",
+    "name": "资源，图片以及图标",
+    "description": "管理资源文件，显示图片，显示图标。",
     "id":"assets"
   },
   {
-    "name": "Input",
-    "description": "Take user input in addition to input widgets in Material Components and Cupertino.",
+    "name": "输入",
+    "description": "除了 Material Design 组件和 库比蒂诺 组件中的用户输入部件以外的获取用户的输入信息的 Widgets。",
     "id":"input"
   },
   {
-    "name": "Animation and Motion",
-    "description": "Bring animations to your app. Check out <a href=\"/animations/\">Animations</a> in Flutter for an overview.",
+    "name": "动画和运动",
+    "description": "为你的应用程序添加动画和运动。你可以从 <a href=\"/animations/\">动画概览</a> 中先了解一些在 Flutter 中使用动画的信息。",
     "id":"animation"
   },
   {
