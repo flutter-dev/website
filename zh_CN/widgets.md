@@ -4,7 +4,6 @@ title: Widget 目录
 permalink: /widgets/
 ---
 
-<<<<<<< HEAD
 使用 Flutter 提供的视觉、结构、平台以及可交互的 Widgets 来更快的构建出一个美观的应用程序。
 
 <p>除了按照分类来浏览这些 Widget，你也可以在 <a href="/widgets/widgetindex/">Flutter Widget 索引页面</a> 看到所有的 Widget。</p>
@@ -23,6 +22,3 @@ permalink: /widgets/
 	</li>
  {% endfor %}
 </ul>
-=======
-这是一个中文页面，哇哈哈哈哈哈哈哈
->>>>>>> parent of 1238fb1... 修改cn-generator.rb，新增对翻译文件数量和进度的统计。

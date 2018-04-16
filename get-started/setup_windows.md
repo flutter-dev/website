@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "开始使用：在 Windows 上安装"
+title: "Get Started: Install on Windows"
 permalink: /setup-windows/
 ---
 
@@ -11,10 +11,8 @@ permalink: /setup-windows/
 
 {% include setup/get-sdk-win.md %}
 
-{% include setup/editor-setup.md %}
-
 {% include setup/android-setup.md %}
 
-## 下一步
+## Next step
 
-[下一步：配置编译器](/get-started/editor/)
+[Next step: Configure Editor](/get-started/editor/)
