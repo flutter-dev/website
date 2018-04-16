@@ -41,9 +41,6 @@
 
 11.由群主关闭对应翻译 issue 。
 
-## 文件结构
-为了减少因为 Flutter 官方文档结构更改造成对中文文档结构的影响，原则上我们不允许直接在原 MD 文档上直接进行翻译。翻译开始前，首先按照原文档的目录结构将文档拷贝至 zh_CN 文件夹下。例如，你要进行翻译的文件为 `~/website/widgets/basics.md`，则将该文件拷贝至 `~/website/zh_CN/widgets/basics.md` 进行翻译。
-
 ## 注意事项
 1. 提交时，comment 的写法为 `transition + path ` 如：`transition website/index.md`
 
@@ -53,8 +50,8 @@
 
 约定高频词翻译对照表(按字母排序)：
 
-| 英文            | 中文      |
-| -------------- | -----      |
+| 英文            | 中文      | 
+| -------------- | -----      | 
 | app            | 应用程序 |
 | app bar/AppBar | 应用栏        |
 | constructor    | 构造方法         |
@@ -83,5 +80,4 @@
 [gdmec07120731](https://github.com/gdmec07120731) 、
 [debuggerx01](https://github.com/debuggerx01)、
 [goldhan](https://github.com/goldhan)、
-[MuffinYu](https://github.com/MuffinYu) 、
-[Kira](https://github.com/gulangxiangjie)
+[MuffinYu](https://github.com/MuffinYu) 
