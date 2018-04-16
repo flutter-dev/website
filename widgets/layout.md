@@ -4,4 +4,4 @@ title: Layout Widgets
 
 permalink: widgets/layout/
 ---
-{% include catalogpage.html category="Layout"%}
+{% include catalogpage.html category="Layout"%}  
