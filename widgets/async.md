@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 异步 Widgets
+title: Async Widgets
 
 permalink: widgets/async/
 ---

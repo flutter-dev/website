@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 滚动 Widgets
+title: Scrolling Widgets
 
 permalink: widgets/scrolling/
 ---

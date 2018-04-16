@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 库比蒂诺（iOS风格的）Widgets
+title: Cupertino (iOS-style) Widgets
 
 permalink: widgets/cupertino/
 ---

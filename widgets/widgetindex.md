@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Flutter Widget 索引
+title: Flutter Widget Index
 permalink: widgets/widgetindex/
 ---
 {% assign sorted = site.data.catalog.widgets | sort:'name' %}
 <div class="catalog">
-    <div class="category-description"><p>下面是一个几乎包含了所有被打包进 Flutter 的 Widget 列表，它们按照字母表的顺序进行排序。你也可以 <a href="/widgets">点击这里</a> 按照不同的分类来浏览这些 Widgets。</p></div>
+    <div class="category-description"><p>This is an alphabetical list of nearly every widget that is bundled with Flutter. You can also <a href="/widgets">browse widgets by category.</a></p></div>
     <ul class="cards">
         {% for comp in sorted %}
         <li class="cards__item">

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 文本 Widgets
+title: Text Widgets
 
 permalink: widgets/text/
 ---
