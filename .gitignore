@@ -16,4 +16,6 @@ packages
 example/*.dart
 
 .idea/
+
 vendor
+
