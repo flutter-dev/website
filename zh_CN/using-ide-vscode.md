@@ -1,6 +1,5 @@
 ---
 layout: page
-
 title: 在 IDE 中开发 Flutter
 
 permalink: /using-ide-vscode/
@@ -15,7 +14,12 @@ permalink: /using-ide-vscode/
 
 <div class="tabs__content current" markdown="1"><!---->
 
+<<<<<<< HEAD
 Visual Studio Code 的 Dart 扩展提供了完整的集成开发体验。
+=======
+The Dart extension provides a fully integrated development experience in Visual Studio Code.
+Visual Studio Code 的 Dart 扩展提供了完整集成开发体验。
+>>>>>>> 5092013... transition website/using-ide-vscode.md
 * TOC Placeholder
 {:toc}
 
