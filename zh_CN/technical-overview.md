@@ -80,84 +80,45 @@ Flutter 框架被组织为多层结构，每个层都建立在前一层之上。
 
 ### 构建 widget
 
-You define the unique characteristics of a widget by implementing a
-[build](https://docs.flutter.io/flutter/widgets/StatelessWidget/build.html)
-function that returns a tree (or hierarchy) of widgets. This tree represents the widget's part
-of the user interface in more concrete terms.  For example, a toolbar widget might
-have a build function that returns a [horizontal layout](https://docs.flutter.io/flutter/widgets/Row-class.html)
-of some [text](https://docs.flutter.io/flutter/widgets/Text-class.html) and
-[various](https://docs.flutter.io/flutter/material/IconButton-class.html)
-[buttons](https://docs.flutter.io/flutter/material/PopupMenuButton-class.html).
-The framework then recursively asks each of these widgets to build until the
-process bottoms out in [fully concrete widgets](https://docs.flutter.io/flutter/widgets/RenderObjectWidget-class.html),
-which the framework then stitches together into a tree.
-
-
 你可以通过实现 Widget 的 [build](https://docs.flutter.io/flutter/widgets/StatelessWidget/build.html) 方法来定义 widget 的独特特征，该方法会返回一个 widget 树（或层级）。该树更具体的表现了用户界面的 widget 层级。例如，一个工具栏 widget 的 build 方法将返回一些[文本](https://docs.flutter.io/flutter/widgets/Text-class.html)和[各种](https://docs.flutter.io/flutter/material/IconButton-class.html) [按钮](https://docs.flutter.io/flutter/material/PopupMenuButton-class.html)的[水平布局](https://docs.flutter.io/flutter/widgets/Row-class.html)。然后，框架递归地要求这些 widget 来构建，直到该过程落在完全具体的 widget 中，然后该框架一起缝合到树中。
 
-A widget's build function should be free of side effects.  Whenever it is asked
-to build, the widget should return a new tree of widgets regardless of what the
-widget previously returned. The framework does the heavily lifting of comparing
-the previous build with the current build and determining what modifications
-need to be made to the user interface.
+widget 的 build 方法应该没有副作用。每当它被要求构建时，widget 应该返回一个新的 widget 树，无论 widget 以前返回的是什么。该框架大大提升了比较先前的 build 与当前 build 方法并确定需要对用户界面进行哪些修改。
+
+这种自动比较非常有效，可实现高性能，互动应用。构建函数的设计将重点放在声明小部件的组成，而不是将用户界面从一种状态更新到另一种状态，从而简化了代码。
+
+### 处理用户交互
 
 
-widget 的 build 方法应该没有副作用。每当它被要求构建时，widget 应该返回一个新的 widget 树，无论 widget 以前返回的是什么。该框架大大提升了比较先前的 build 与当前 build 并确定需要对用户界面进行哪些修改。
+如果一个 widget 的独特特性需要根据用户进行更改交互或其他因素，那么该 widget 是*有状态的*。例如，如果一个 widget 的计数器在用户点击一个按钮时递增，那么该计数器的值就是该 widget 的状态。当该值发生变化时，需要重新构建小部件以更新 UI 。
 
-This automated comparison is quite effective, enabling high-performance,
-interactive apps. And the design of the build function simplifies your code by
-focusing on declaring what a widget is made of, rather than the complexities of
-updating the user interface from one state to another.
-
-### Handling user interaction
-
-If the unique characteristics of a widget need to change based on user
-interaction or other factors, that widget is *stateful*. For example, if a
-widget has a counter that increments whenever the user taps a button, the value
-of the counter is the state for that widget. When that value changes, the widget
-needs to be rebuilt to update the UI.
-
-These widgets subclass [StatefulWidget](https://docs.flutter.io/flutter/widgets/StatefulWidget-class.html)
-(rather than [StatelessWidget](https://docs.flutter.io/flutter/widgets/StatelessWidget-class.html))
-and store their mutable state in a subclass of [State](https://docs.flutter.io/flutter/widgets/State-class.html).
+这些 widget 将 [StatefulWidget](https://docs.flutter.io/flutter/widgets/StatefulWidget-class.html)（而不是 [StatelessWidget](https://docs.flutter.io/flutter/widgets/StatelessWidget-class.html) ）子类化并将它们的可变状态存储在 [State](https://docs.flutter.io/flutter/widgets/State-class.html) 的子类中。
 
 <object type="image/svg+xml" data="/images/whatisflutter/diagram-state.svg" style="width: 85%; height: 85%"></object>
 
-Whenever you mutate a State object (e.g., increment the counter), you must call
-[setState](https://docs.flutter.io/flutter/widgets/State/setState.html)() to
-signal the framework to update the user interface by calling the State's build
-method again. For an example of managing state, see the [MyApp template](https://github.com/flutter/flutter/blob/master/packages/flutter_tools/templates/create/lib/main.dart.tmpl) that's created with each new Flutter project.
+每当你改变一个 State 对象时（例如增加计数器），你必须调用 [setState](https://docs.flutter.io/flutter/widgets/State/setState.html)() 来通知框架通过再次调用 State 的构建方法来更新用户界面。有关管理 state 的示例，请参阅每个新 Flutter 项目创建的 [MyApp 模板](https://github.com/flutter/flutter/blob/master/packages/flutter_tools/templates/create/lib/main.dart.tmpl)。
 
-Having separate state and widget objects lets other widgets treat stateless and
-stateful widgets in the same way, without being concerned about losing state.
-Rather than needing to hold on to a child to preserve its state, the parent is
-free to create a new instance of the child without losing the child's persistent
-state. The framework does all the work of finding and reusing existing state
-objects when appropriate.
 
-## Try it!
+具有独立的状态和 widget 对象可以让其他 widget 以相同的方式处理无状态和有状态widget，而不必担心丢失状态。父类不需要保存子类的状态，而是可以自由地创建子类的新实例，而不会丢失子类的持久状态。框架在适当的时候完成所有查找和重用现有状态对象的工作。
 
-Now that you're familiar with the basic structure and principles of the Flutter
-framework, along with how to build apps and make them interactive, you're ready
-to start developing and iterating.
+## 尝试一下!
 
-Next steps:
+现在你已经熟悉了 Flutter 框架的基本结构和原理，以及如何构建应用程序并使其交互，就可以开始开发和迭代了。
 
-1.  [Follow the Flutter Getting Started guide](/get-started/).
-1.  Try [Building Layouts in Flutter](/tutorials/layout/) and
-    [Adding Interactivity to Your Flutter App](/tutorials/interactive/).
-1.  Follow a detailed example in [Tour of the Widget Framework](/widgets-intro/).
+接下来:
 
-## Get support
+1.  按照 [Flutter 入门指南](/get-started/)。
+1.  尝试[在 Flutter 中构建布局](/tutorials/layout/)并[为你的 Flutter 应用添加交互性](/tutorials/interactive/)。
+1.  按照浏览[窗口小部件框架](/widgets-intro/)中的详细示例。
 
-Track the Flutter project and join the conversation in a variety of ways.
-We're open source and would love to hear from you.
+## 获取支持
 
-- [Ask HOWTO questions that can be answered with specific solutions][so]
-- [Live chat with Flutter engineers and users][gitter]
-- [Discuss Flutter, best practices, app design, and more on our mailing list][mailinglist]
-- [Report bugs, request features and docs][issues]
-- [Follow us on Twitter: @flutterio](https://twitter.com/flutterio/)
+跟踪 Flutter 项目并以各种方式加入对话。我们是开源的，期望听到你的消息。
+
+- [询问可以用特定解决方案回答的 HOWTO 问题][so] 
+- [与 Flutter 工程师和用户进行实时聊天][gitter] 
+- [在我们的邮件列表中讨论 Flutter ，最佳实践，应用程序设计等等][mailinglist]
+- [报告错误，请求功能和文档][issues]
+- [在 Twitter 上关注我们：@flutterio](https://twitter.com/flutterio/)
 
 
 [issues]: https://github.com/flutter/flutter/issues
