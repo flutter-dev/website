@@ -4,7 +4,7 @@ title: "AppBar with a custom bottom widget."
 permalink: /catalog/samples/app-bar-bottom/
 ---
 
-Any widget with a PreferredSize can appear at the bottom of an AppBar.
+任何具有 PreferredSize 的 widget 都可以出现在应用栏的底部。
 
 <p>
   <div class="container-fluid">
@@ -15,7 +15,7 @@ Any widget with a PreferredSize can appear at the bottom of an AppBar.
             <img style="border:1px solid #000000" src="https://storage.googleapis.com/flutter-catalog/cb4a54db8fb3726bf4293b9cc5cb12ce16883803/app_bar_bottom_small.png" alt="Android screenshot" class="img-responsive">
           </div>
           <div class="panel-footer">
-            Android screenshot
+            Android 截图
           </div>
         </div>
       </div>
@@ -23,13 +23,9 @@ Any widget with a PreferredSize can appear at the bottom of an AppBar.
   </div>
 </p>
 
-Typically an AppBar's bottom widget is a TabBar however any widget with a
-PreferredSize can be used. In this app, the app bar's bottom widget is a
-TabPageSelector that displays the relative position of the selected page
-in the app's TabBarView. The arrow buttons in the toolbar part of the app
-bar and they select the previous or the next page.
+通常，应用栏的底部 widget 是 TabBar ，但是也可以使用任何具有 PreferredSize 的 widget 。在这个应用程序中，应用栏底部 widget 是一个 TabPageSelector ，用来展示应用程序的 TabBarView 已选中页面的相对位置。应用栏中工具栏部分的箭头按钮，我们用它们来选择上一页或下一页。
 
-Try this app out by creating a new project with `flutter create` and replacing the contents of `lib/main.dart` with the code that follows.
+使用 `flutter create` 来创建一个新项目，并用下面的代码替换 `lib/main.dart` 的内容来尝试运行。
 
 ```dart
 // Copyright 2017 The Chromium Authors. All rights reserved.
@@ -153,7 +149,7 @@ void main() {
 }
 ```
 
-<h2>See also:</h2>
-- The "Components-Tabs" section of the Material Design specification:
+<h2>另请参阅:</h2>
+- Material Design 规范中的 "Components-Tabs" 部分：
     <https://material.io/guidelines/components/tabs.html>
-- The source code in [examples/catalog/lib/app_bar_bottom.dart](https://github.com/flutter/flutter/blob/master/examples/catalog/lib/app_bar_bottom.dart).
+- 源码 [examples/catalog/lib/app_bar_bottom.dart](https://github.com/flutter/flutter/blob/master/examples/catalog/lib/app_bar_bottom.dart).
