@@ -4,9 +4,9 @@ title: "Sample App Catalog"
 permalink: /catalog/samples/
 ---
 
-This catalog lists applications that demonstrate how to implement common mobile design patterns with Flutter. Each sample demonstrates how a few Flutter widgets can be put together to implement a meaningful user interface. The samples are short - just one Dart file - but they're complete applications. They should be easy to try out and tweak with your favorite IDE/code editor....
+本目录列出了演示如何使用 Flutter 实现常见移动设计模式的应用程序。每个示例演示了如何将几个 Flutter 小部件放在一起来实现有意义的用户界面。这些示例很短，仅有一个 Dart 文件，但是它们都是完整的应用程序。他们应该很容易用你最喜欢的 IDE 或代码编辑器来尝试和调整。
 
-If there are other sample apps that you'd like to see we'd appreciate hearing from you on our [Gitter channel](https://gitter.im/flutter/flutter) or [mailing list](https://groups.google.com/d/forum/flutter-dev).
+如果你还有其他示例应用程序想要查看，我们将非常欢迎在我们的 [Gitter 频道](https://gitter.im/flutter/flutter) 或 [邮件列表](https://groups.google.com/d/forum/flutter-dev) 收到您的来信。
 
 ---
 
@@ -19,15 +19,13 @@ If there are other sample apps that you'd like to see we'd appreciate hearing fr
    </a>
     <div class="col-md-9">
       <p>
-        An AnimatedList that displays a list of cards which stay
-in sync with an app-specific ListModel. When an item is added to or removed
-from the model, the corresponding card animates in or out of view.
+        AnimatedList 显示了一个与应用程序特定的 ListModel 保持同步的卡片列表，当条目被添加到模型或从模型中删除时，相应的卡片会以动画的方式在UI中插入或移除。
       </p>
       <p>
-        This app features the following classes: AnimatedList, AnimatedListState.
+        这个应用程序是以下类的特点：AnimatedList，AnimatedListState。
       </p>
       <p>
-        <a href="/catalog/samples/animated-list/">Learn more</a>.
+        <a href="/catalog/samples/animated-list/">了解更多</a>.
       </p>
     </div>
   </div>
@@ -40,13 +38,13 @@ from the model, the corresponding card animates in or out of view.
    </a>
     <div class="col-md-9">
       <p>
-        Any widget with a PreferredSize can appear at the bottom of an AppBar.
+        任何具有 PreferredSize 的 widget 都可以出现在应用栏的底部。
       </p>
       <p>
-        This app features the following classes: AppBar, PreferredSize, TabBarView, TabController.
+        这个应用程序是以下类的特点：AppBar，PreferredSize，TabBarView，TabController。
       </p>
       <p>
-        <a href="/catalog/samples/app-bar-bottom/">Learn more</a>.
+        <a href="/catalog/samples/app-bar-bottom/">了解更多</a>.
       </p>
     </div>
   </div>
@@ -59,13 +57,13 @@ from the model, the corresponding card animates in or out of view.
    </a>
     <div class="col-md-9">
       <p>
-        A typical AppBar with a title, actions, and an overflow dropdown menu.
+        一个典型的应用栏带有标题，操作和下拉菜单。
       </p>
       <p>
-        This app features the following classes: AppBar, IconButton, PopupMenuButton, Scaffold.
+        这个应用程序是以下类的特点： AppBar， IconButton， PopupMenuButton， Scaffold。
       </p>
       <p>
-        <a href="/catalog/samples/basic-app-bar/">Learn more</a>.
+        <a href="/catalog/samples/basic-app-bar/">了解更多</a>.
       </p>
     </div>
   </div>
@@ -78,13 +76,13 @@ from the model, the corresponding card animates in or out of view.
    </a>
     <div class="col-md-9">
       <p>
-        ExpansionTiles can be used to produce two-level or multi-level lists.
+        ExpansionTiles 可用于生成二级或多级列表。
       </p>
       <p>
-        This app features the following classes: ExpansionTile, ListView.
+        这个应用程序是以下类的特点：ExpansionTile，ListView。
       </p>
       <p>
-        <a href="/catalog/samples/expansion-tile-sample/">Learn more</a>.
+        <a href="/catalog/samples/expansion-tile-sample/">了解更多</a>.
       </p>
     </div>
   </div>
