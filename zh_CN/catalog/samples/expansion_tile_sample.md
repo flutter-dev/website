@@ -4,7 +4,7 @@ title: "ExpansionTile"
 permalink: /catalog/samples/expansion-tile-sample/
 ---
 
-ExpansionTiles can used to produce two-level or multi-level lists.
+ExpansionTiles 可用于生成二级或多级列表。
 
 <p>
   <div class="container-fluid">
@@ -15,7 +15,7 @@ ExpansionTiles can used to produce two-level or multi-level lists.
             <img style="border:1px solid #000000" src="https://storage.googleapis.com/flutter-catalog/cb4a54db8fb3726bf4293b9cc5cb12ce16883803/expansion_tile_sample_small.png" alt="Android screenshot" class="img-responsive">
           </div>
           <div class="panel-footer">
-            Android screenshot
+            Android 截图
           </div>
         </div>
       </div>
@@ -28,12 +28,16 @@ expands or collapses the view of its children. When a tile is collapsed
 its children are disposed so that the widget footprint of the list only
 reflects what's visible.
 
+这个应用程序使用 ExpansionTiles 展示分层数据。点击一个图块会展开或折叠其子视图。当图块被折叠时，它的子视图被放置，以便列表的 widget 足迹只反映可见的东西。
+
 When displayed within a scrollable that creates its list items lazily,
 like a scrollable list created with `ListView.builder()`, ExpansionTiles
 can be quite efficient, particularly for Material Design "expand/collapse"
 lists.
 
-Try this app out by creating a new project with `flutter create` and replacing the contents of `lib/main.dart` with the code that follows.
+当显示在一个可滚动的列表项中时，它会像使用 `ListView.builder()` 创建的可滚动列表一样，ExpansionTiles 可以非常有效，特别是对于 Material Design "展开/折叠"列表。
+
+使用 `flutter create` 来创建一个新项目，并用下面的代码替换 `lib/main.dart` 的内容来尝试运行。
 
 ```dart
 // Copyright 2017 The Chromium Authors. All rights reserved.
@@ -131,7 +135,7 @@ void main() {
 }
 ```
 
-<h2>See also:</h2>
-- The "expand/collapse" part of the Material Design specification:
+<h2>更多参阅:</h2>
+- Material Design 规范中的 "expand/collapse" 部分：
     <https://material.io/guidelines/components/lists-controls.html#lists-controls-types-of-list-controls>
-- The source code in [examples/catalog/lib/expansion_tile_sample.dart](https://github.com/flutter/flutter/blob/master/examples/catalog/lib/expansion_tile_sample.dart).
+- 源码 [examples/catalog/lib/expansion_tile_sample.dart](https://github.com/flutter/flutter/blob/master/examples/catalog/lib/expansion_tile_sample.dart).
