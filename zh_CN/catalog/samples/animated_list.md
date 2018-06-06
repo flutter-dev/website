@@ -4,9 +4,7 @@ title: "AnimatedList"
 permalink: /catalog/samples/animated-list/
 ---
 
-An AnimatedList that displays a list of cards which stay
-in sync with an app-specific ListModel. When an item is added to or removed
-from the model, the corresponding card animates in or out of view.
+AnimatedList 显示了一个与应用程序特定的 ListModel 保持同步的卡片列表，当条目被添加到模型或从模型中删除时，相应的卡片会以动画的方式在UI中插入或移除。
 
 <p>
   <div class="container-fluid">
@@ -17,7 +15,7 @@ from the model, the corresponding card animates in or out of view.
             <img style="border:1px solid #000000" src="https://storage.googleapis.com/flutter-catalog/cb4a54db8fb3726bf4293b9cc5cb12ce16883803/animated_list_small.png" alt="Android screenshot" class="img-responsive">
           </div>
           <div class="panel-footer">
-            Android screenshot
+            Android 截图
           </div>
         </div>
       </div>
@@ -25,14 +23,9 @@ from the model, the corresponding card animates in or out of view.
   </div>
 </p>
 
-Tap an item to select it, tap it again to unselect. Tap '+' to insert at the
-selected item, '-' to remove the selected item. The tap handlers add or
-remove items from a `ListModel<E>`, a simple encapsulation of `List<E>`
-that keeps the AnimatedList in sync. The list model has a GlobalKey for
-its animated list. It uses the key to call the insertItem and removeItem
-methods defined by AnimatedListState.
+点击一个条目选择它，再次点击取消选择。点击'+'在选定条目插入一个条目，点击'-'移除选定条目。tap 处理器添加或删除 `ListModel<E>` 中的条目，这是 `List<E>` 的简单封装，可使 AnimatedList 保持同步。列表模型为其动画列表提供了一个 GlobalKey ，它使用该键来调用由 AnimatedListState 定义的 insertItem 和 removeItem 方法。
 
-Try this app out by creating a new project with `flutter create` and replacing the contents of `lib/main.dart` with the code that follows.
+使用 `flutter create` 来创建一个新项目，并用下面的代码替换 `lib/main.dart` 的内容来尝试运行。
 
 ```dart
 // Copyright 2017 The Chromium Authors. All rights reserved.
@@ -238,7 +231,7 @@ void main() {
 }
 ```
 
-<h2>See also:</h2>
-- The "Components-Lists: Controls" section of the Material Design specification:
+<h2>另请参阅:</h2>
+- Material Design 规范中的 "Components-Lists: Controls" 部分：
     <https://material.io/guidelines/components/lists-controls.html#>
-- The source code in [examples/catalog/lib/animated_list.dart](https://github.com/flutter/flutter/blob/master/examples/catalog/lib/animated_list.dart).
+- 源码 [examples/catalog/lib/animated_list.dart](https://github.com/flutter/flutter/blob/master/examples/catalog/lib/animated_list.dart).
