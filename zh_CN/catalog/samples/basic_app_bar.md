@@ -4,7 +4,7 @@ title: "AppBar Basics"
 permalink: /catalog/samples/basic-app-bar/
 ---
 
-A typical AppBar with a title, actions, and an overflow dropdown menu.
+带有标题，操作和下拉菜单的典型应用栏。
 
 <p>
   <div class="container-fluid">
@@ -15,7 +15,7 @@ A typical AppBar with a title, actions, and an overflow dropdown menu.
             <img style="border:1px solid #000000" src="https://storage.googleapis.com/flutter-catalog/cb4a54db8fb3726bf4293b9cc5cb12ce16883803/basic_app_bar_small.png" alt="Android screenshot" class="img-responsive">
           </div>
           <div class="panel-footer">
-            Android screenshot
+            Android 截图
           </div>
         </div>
       </div>
@@ -23,11 +23,10 @@ A typical AppBar with a title, actions, and an overflow dropdown menu.
   </div>
 </p>
 
-An app that displays one of a half dozen choices with an icon and a title.
-The two most common choices are available as action buttons and the remaining
-choices are included in the overflow dropdow menu.
 
-Try this app out by creating a new project with `flutter create` and replacing the contents of `lib/main.dart` with the code that follows.
+用图标和标题显示六种选择中的一种的应用程序。两种最常见的选项可用作操作按钮，其余选项包含在下拉菜单中。
+
+使用 `flutter create` 来创建一个新项目，并用下面的代码替换 `lib/main.dart` 的内容来尝试运行。
 
 ```dart
 // Copyright 2017 The Chromium Authors. All rights reserved.
@@ -132,7 +131,7 @@ void main() {
 }
 ```
 
-<h2>See also:</h2>
-- The "Layout-Structure" section of the Material Design specification:
+<h2>另请参阅:</h2>
+- Material Design 规范中的 "Layout-Structure" 部分：
     <https://material.io/guidelines/layout/structure.html#structure-app-bar>
-- The source code in [examples/catalog/lib/basic_app_bar.dart](https://github.com/flutter/flutter/blob/master/examples/catalog/lib/basic_app_bar.dart).
+- 源码 [examples/catalog/lib/basic_app_bar.dart](https://github.com/flutter/flutter/blob/master/examples/catalog/lib/basic_app_bar.dart).
