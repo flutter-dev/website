@@ -23,19 +23,9 @@ ExpansionTiles 可用于生成二级或多级列表。
   </div>
 </p>
 
-This app displays hierarchical data with ExpansionTiles. Tapping a tile
-expands or collapses the view of its children. When a tile is collapsed
-its children are disposed so that the widget footprint of the list only
-reflects what's visible.
+这个应用程序使用 ExpansionTiles 展示分层数据。点击一个图块会展开或折叠其子视图。当图块被折叠时，它的子视图被隐藏，以便列表的 widget 覆盖区只反映可见的东西。
 
-这个应用程序使用 ExpansionTiles 展示分层数据。点击一个图块会展开或折叠其子视图。当图块被折叠时，它的子视图被放置，以便列表的 widget 足迹只反映可见的东西。
-
-When displayed within a scrollable that creates its list items lazily,
-like a scrollable list created with `ListView.builder()`, ExpansionTiles
-can be quite efficient, particularly for Material Design "expand/collapse"
-lists.
-
-当显示在一个可滚动的列表项中时，它会像使用 `ListView.builder()` 创建的可滚动列表一样，ExpansionTiles 可以非常有效，特别是对于 Material Design "展开/折叠"列表。
+当在一个可滚动的列表项中显示时，它会像使用 `ListView.builder()` 创建的可滚动列表一样，ExpansionTiles 可以非常有效，特别是对于 Material Design "展开/折叠"列表。
 
 使用 `flutter create` 来创建一个新项目，并用下面的代码替换 `lib/main.dart` 的内容来尝试运行。
 
