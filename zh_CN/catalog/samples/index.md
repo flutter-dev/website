@@ -25,7 +25,7 @@ permalink: /catalog/samples/
         这个应用程序是以下类的特点：AnimatedList，AnimatedListState。
       </p>
       <p>
-        <a href="/catalog/samples/animated-list/">了解更多</a>.
+        <a href="/catalog/samples/animated-list/">了解更多</a>。
       </p>
     </div>
   </div>
