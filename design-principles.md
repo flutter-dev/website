@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Design Principles
+title: Flutter's Development Philosophy
 
 permalink: /design-principles/
 ---
@@ -124,12 +124,18 @@ To make a change that will require developers to change their code:
     label.
 
  2. Send an e-mail to <mailto:flutter-dev@googlegroups.com> to socialize
-    your proposed change. The e-mail should include the following:
+    your proposed change. The purpose of this e-mail is to see if you can
+    get consensus around your change. **You are not telling people that
+    the change will happen, you are asking them for permission.**
+    The e-mail should include the following:
 
-    - A subject line that clearly summarises the change and sounds like it
-      matters (so that people can spot these e-mails among the noise).
+    - A subject line that clearly summarises the proposed change and sounds like it
+      matters (so that people can spot these e-mails among the noise). Prefix
+      the subject line with `[Breaking Change]`.
 
     - A summary of each change you propose.
+
+    - A brief justification for the change.
 
     - A link to the issue you filed in step 1, and any PRs you may have already
       posted relating to this change.
@@ -138,16 +144,14 @@ To make a change that will require developers to change their code:
       form, if possible. If not possible, clear steps for figuring out how to
       port the code.
 
-    - A brief justification for the change.
-
     - A sincere offer to help port code, which includes the preferred venue for
       contacting the person who made the change.
 
     - A request that people notify you if this change will be a problem,
       perhaps by discussing the change in the issue tracker on on the pull request.
 
- 3. If folks agree that the benefits of changing the API outweigh the stablity
-    costs, you can proceed with the normal code review process for making
+ 3. **If folks agree that the benefits of changing the API outweigh the stablity
+    costs**, you can proceed with the normal code review process for making
     changes. You should leave some time between steps 2 and 3 (at a bare minimum
     24 hours during the work week so that people in all time zones have had a
     chance to see it, but ideally a week or so).
@@ -175,7 +179,7 @@ class FooInterface {
 ```
 
 If you use `@deprecated`, make sure to remember to actually remove the feature a few
-weeks later, do not just leave it forever!
+weeks later (after the next beta release), do not just leave it forever!
 
 
 #### Google-only responsibilities
@@ -238,18 +242,28 @@ so as to make it reappear on the list.
 API design
 ----------
 
-* There should be no objects that represent live state that reflects
-  some other state, since they are expensive to maintain. e.g. no
-  `HTMLCollection`.
+We have learned various lessons over the years.
+
+* There should be no objects that represent live state that reflect
+  some state from another source, since they are expensive to maintain.
+  (The Web's `HTMLCollection` object is an example of such an object.)
+  In other words, **keep only one source of truth**, and **don't replicate
+  live state**.
 
 * Property getters should be efficient (e.g. just returning a cached
-  value, or an O(1) table lookup). If an operation is inefficient it
+  value, or an O(1) table lookup). If an operation is inefficient, it
   should be a method instead. e.g. `document.getForms()`, not
-  `document.forms`.
+  `document.forms` (it walks the entire tree).
+  
+  - Asynchronous expensive operations can be represented by futures.
+    A method can start the work and return a future; a getter can return 
+    a future corresponding to already-running work. A getter should not
+    kick-off the work and return the future, since getters appear idempotent
+    and side-effect free.
 
 * There should be no APIs that require synchronously completing an
   expensive operation (e.g. computing a full app layout outside of the
-  layout phase).
+  layout phase). Expensive work should be asynchronous.
 
 * We use a layered framework design, where each layer addresses a
   narrowly scoped problem and is then used by the next layer to solve
@@ -273,13 +287,31 @@ API design
   - String manipulation to generate data or code that will subsequently
     be interpreted or parsed is a bad practice as it leads to code
     injection vulnerabilities.
+    
+  - If an operation is expensive, that expense should be represented
+    in the API (e.g. by returning a `Future` or a `Stream`).  Avoid
+    providing APIs that hide the expense of tasks.
 
-* If we wrap some aspect of a service from one environment for exposure
-  in another environment (for example, exposing an Android API in Dart),
-  we should expose/wrap all of it, so that there's no cognitive cliff
+* Convenience APIs that wrap some aspect of a service from one environment
+  for exposure in another environment (for example, exposing an Android API
+  in Dart), should expose/wrap the complete API, so that there's no cognitive cliff
   when interacting with that service (where you are fine using the exposed
   API up to a point, but beyond that have to learn all about the underlying
   service).
+  
+* APIs that wrap underlying services but prevent the underlying API from
+  being directly accessed (e.g. how `dart:ui` exposes Skia) should carefully
+  expose only the best parts of the underlying API. This may require refactoring
+  features so that they are more usable. It may mean avoiding exposing
+  convenience features that abstract over expensive operations unless there's a
+  distinct performance gain from doing so. A smaller API surface is easier
+  to understand.
+  
+  - This is why `dart:ui` doesn't expose `Path.fromSVG()`: we checked, and it
+    is just as fast to do that work directly in Dart, so there is no benefit
+    to exposing it. That way, we avoid the costs (bigger API surfaces are more
+    expensive to maintain, document, and test, and put a compatibility burden
+    on the underlying API).
 
 
 Bugs

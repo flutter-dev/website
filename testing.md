@@ -18,7 +18,7 @@ There are many kinds of automated testing. These are summarized below:
 
 - A _unit test_ tests a single function, method, or class. External dependencies
   of the unit under test are generally mocked out using, for example,
-  [`package:mockito`](https://github.com/fibulwinter/dart-mockito/blob/master/README.md).
+  [`package:mockito`](https://github.com/dart-lang/mockito).
   Unit tests generally do not read from/write to disk, render to screen and do
   not receive user actions from outside the process running the test. The goal
   of a unit test is to verify the correctness of a unit of logic under a
@@ -177,7 +177,7 @@ pair - a test script and a Flutter app instrumented to receive commands
 from the test. Unlike unit and widget tests, integration test code does not run
 in the same process as the app that's being tested. Instead, the tested
 app is launched on a _real device_ or in an _emulator_ (e.g. Android
-simulator or iOS Simulator). The test script runs on your computer. It connects
+Emulator or iOS Simulator). The test script runs on your computer. It connects
 to the app and issues commands to the app to perform various
 user actions. This is known as "driving" the app. Flutter provides tools
 and APIs, collectively referred to as _Flutter Driver_, to do just that.
@@ -297,8 +297,12 @@ void main() {
       // the scrolling session. It can be digested into a handful of useful
       // aggregate numbers, such as "average frame build time".
       TimelineSummary summary = new TimelineSummary.summarize(timeline);
-      summary.writeSummaryToFile('stocks_scroll_perf', pretty: true);
-      summary.writeTimelineToFile('stocks_scroll_perf', pretty: true);
+
+      // The following line saves the timeline summary to a JSON file.
+      summary.writeSummaryToFile('scrolling_performance', pretty: true);
+
+      // The following line saves the raw timeline data as JSON.
+      summary.writeTimelineToFile('scrolling_performance', pretty: true);
     });
   });
 }
@@ -323,3 +327,14 @@ You might be wondering how the command finds the correct test file. The
 `flutter drive` command uses a convention to look for the test file in the same
 directory as the instrumented `--target` app that has the same file name
 but for the `_test` suffix in it.
+
+## Continuous integration and testing
+
+For information on continuous deployment and testing, see
+
+* [Continuous Delivery using Fastlane with Flutter](/fastlane-cd/)
+* [Test Flutter apps on Travis](https://medium.com/flutter-io/test-flutter-apps-on-travis-3fd5142ecd8c)
+
+
+
+

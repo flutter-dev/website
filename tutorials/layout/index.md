@@ -176,20 +176,17 @@ class MyApp extends StatelessWidget {
 <aside class="alert alert-success" markdown="1">
 <i class="fa fa-lightbulb-o"> </i> **Tip:**
 When pasting code into your app, indentation can
-become skewed. You can fix this in IntelliJ by right-clicking the
-Dart code and selecting **Reformat with Dart Style**.
-Or, at the command line, you can use
-[dartfmt](https://github.com/dart-lang/dart_style).
+become skewed. You can fix this in your Flutter editor
+using the [automatic reformatting support](/formatting/).
 </aside>
 
 <aside class="alert alert-success" markdown="1">
 <i class="fa fa-lightbulb-o"> </i> **Tip:**
 For a faster development experience, try Flutter's hot reload feature.
 Hot reload allows you to modify your code and see the changes without
-fully restarting the app. The
-[Flutter plugin for IntelliJ](/using-ide/) supports
-hot reload, or you can trigger from the command line.
-For more information, see [Hot Reloads vs. Full Application
+fully restarting the app. The Flutter enabled IDEs support
+['hot reload on save'](/hot-reload/), or you can trigger from the command line.
+For more information about reloads, see [Hot Reloads vs. Full Application
 Restarts](https://flutter.io/using-ide/#hot-reloads-vs-full-application-restarts).
 </aside>
 
@@ -305,7 +302,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //...
-
     Widget textSection = new Container(
       padding: const EdgeInsets.all(32.0),
       child: new Text(
@@ -334,6 +330,8 @@ so you can now reference it from your code:
 <!-- code/layout/lakes/main.dart -->
 <!-- skip -->
 {% prettify dart %}
+return new MaterialApp(
+//...
 body: new ListView(
   children: [
     new Image.asset(
@@ -343,7 +341,9 @@ body: new ListView(
     ),
     // ...
   ],
-)
+),
+//...
+);
 {% endprettify %}
 
 `BoxFit.cover` tells the framework that the image should be as small as
@@ -360,19 +360,30 @@ when running the app on a small device.
 <!-- code/layout/lakes/main.dart -->
 {% prettify dart %}
 //...
-body: new ListView(
-  children: [
-    new Image.asset(
-      'images/lake.jpg',
-      width: 600.0,
-      height: 240.0,
-      fit: BoxFit.cover,
-    ),
-    titleSection,
-    buttonSection,
-    textSection,
-  ],
-),
+return new MaterialApp(
+      title: 'Flutter Demo',
+      theme: new ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Top Lakes'),
+        ),
+        body: new ListView(
+          children: [
+            new Image.asset(
+              'images/lake.jpg',
+              width: 600.0,
+              height: 240.0,
+              fit: BoxFit.cover,
+            ),
+            titleSection,
+            buttonSection,
+            textSection,
+          ],
+        ),
+      ),
+    );
 //...
 {% endprettify %}
 
@@ -1482,7 +1493,7 @@ class _MyHomePageState extends State<MyHomePage> {
 ### Card
 
 A Card, from the Material Components library, contains related nuggets of information
-and can be composed from most any widget, but is often used with ListTile.
+and can be composed from almost any widget, but is often used with ListTile.
 Card has a single child, but its child can be a column, row, list, grid,
 or other widget that supports multiple children. By default, a Card shrinks
 its size to 0 by 0 pixels. You can use
