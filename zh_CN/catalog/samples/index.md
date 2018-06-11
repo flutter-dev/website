@@ -44,7 +44,7 @@ permalink: /catalog/samples/
         这个应用程序是以下类的特点：AppBar，PreferredSize，TabBarView，TabController。
       </p>
       <p>
-        <a href="/catalog/samples/app-bar-bottom/">了解更多</a>.
+        <a href="/catalog/samples/app-bar-bottom/">了解更多</a>。
       </p>
     </div>
   </div>
@@ -63,7 +63,7 @@ permalink: /catalog/samples/
         这个应用程序是以下类的特点： AppBar， IconButton， PopupMenuButton， Scaffold。
       </p>
       <p>
-        <a href="/catalog/samples/basic-app-bar/">了解更多</a>.
+        <a href="/catalog/samples/basic-app-bar/">了解更多</a>。
       </p>
     </div>
   </div>
@@ -82,7 +82,7 @@ permalink: /catalog/samples/
         这个应用程序是以下类的特点：ExpansionTile，ListView。
       </p>
       <p>
-        <a href="/catalog/samples/expansion-tile-sample/">了解更多</a>.
+        <a href="/catalog/samples/expansion-tile-sample/">了解更多</a>。
       </p>
     </div>
   </div>
