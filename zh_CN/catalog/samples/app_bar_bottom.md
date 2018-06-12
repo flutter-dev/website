@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "AppBar with a custom bottom widget."
+title: "具有自定义底部 widget 的应用栏。"
 permalink: /catalog/samples/app-bar-bottom/
 ---
 

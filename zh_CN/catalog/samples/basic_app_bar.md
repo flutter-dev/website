@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "AppBar Basics"
+title: "应用栏基本要素"
 permalink: /catalog/samples/basic-app-bar/
 ---
 

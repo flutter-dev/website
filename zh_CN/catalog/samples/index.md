@@ -1,12 +1,12 @@
 ---
 layout: page
-title: "Sample App Catalog"
+title: "示例目录"
 permalink: /catalog/samples/
 ---
 
 本目录列出了演示如何使用 Flutter 实现常见移动设计模式的应用程序。每个示例演示了如何将几个 Flutter 小部件放在一起来实现有意义的用户界面。这些示例很短，仅有一个 Dart 文件，但是它们都是完整的应用程序。他们应该很容易用你最喜欢的 IDE 或代码编辑器来尝试和调整。
 
-如果你还有其他示例应用程序想要查看，我们将非常欢迎在我们的 [Gitter 频道](https://gitter.im/flutter/flutter) 或 [邮件列表](https://groups.google.com/d/forum/flutter-dev) 收到您的来信。
+如果你还有其他示例应用程序想要查看，我们将非常欢迎在我们的 [Gitter 频道](https://gitter.im/flutter/flutter)或[邮件列表](https://groups.google.com/d/forum/flutter-dev)收到您的来信。
 
 ---
 
@@ -25,7 +25,7 @@ permalink: /catalog/samples/
         这个应用程序是以下类的特点：AnimatedList，AnimatedListState。
       </p>
       <p>
-        <a href="/catalog/samples/animated-list/">了解更多</a>.
+        <a href="/catalog/samples/animated-list/">了解更多</a>。
       </p>
     </div>
   </div>
@@ -44,7 +44,7 @@ permalink: /catalog/samples/
         这个应用程序是以下类的特点：AppBar，PreferredSize，TabBarView，TabController。
       </p>
       <p>
-        <a href="/catalog/samples/app-bar-bottom/">了解更多</a>.
+        <a href="/catalog/samples/app-bar-bottom/">了解更多</a>。
       </p>
     </div>
   </div>
@@ -63,7 +63,7 @@ permalink: /catalog/samples/
         这个应用程序是以下类的特点： AppBar， IconButton， PopupMenuButton， Scaffold。
       </p>
       <p>
-        <a href="/catalog/samples/basic-app-bar/">了解更多</a>.
+        <a href="/catalog/samples/basic-app-bar/">了解更多</a>。
       </p>
     </div>
   </div>
@@ -82,7 +82,7 @@ permalink: /catalog/samples/
         这个应用程序是以下类的特点：ExpansionTile，ListView。
       </p>
       <p>
-        <a href="/catalog/samples/expansion-tile-sample/">了解更多</a>.
+        <a href="/catalog/samples/expansion-tile-sample/">了解更多</a>。
       </p>
     </div>
   </div>
