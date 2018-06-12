@@ -1,68 +1,41 @@
 ---
 layout: page
-title: Flutter for iOS Developers
+title: iOS 开发者参考
 permalink: /flutter-for-ios/
 ---
 
-This document is for iOS developers looking to apply their existing iOS knowledge
-to build mobile apps with Flutter. If you understand the fundamentals of the iOS
-framework then you can use this document as a way to get started learning Flutter
-development.
+本文档适用于那些希望用他们目前的 iOS 知识来使用 Flutter 构建移动应用的 iOS 开发者们。如果你熟悉 iOS 框架基础的话，那么你可以借助这个文档快速开始 Flutter 开发。
 
-Your iOS knowledge and skill set are highly valuable when building with
-Flutter, because Flutter relies on the mobile operating system for numerous
-capabilities and configurations. Flutter is a new way to build UIs for mobile,
-but it has a plugin system to communicate with iOS (and Android) for non-UI
-tasks. If you're an expert in iOS development, you don't have to relearn everything
-to use Flutter.
+在使用 Flutter 构建应用时，你的 iOS 知识和技能非常有价值，因为 Flutter 依赖于众多的手机操作系统功能和配置。Flutter 是一种构建手机用户界面的新方法，但它有一个插件系统可以与 iOS（和 Android）进行非 UI 任务进行通信。如果你是 iOS 开发专家，那么你不用重新学习所有内容就可以使用 Flutter。
 
-This document can be used as a cookbook by jumping around and finding questions
-that are most relevant to your needs.
+此文档可作为手册来跳转并查找与您的需求最相关的问题。
 
 * TOC Placeholder
 {:toc}
 
-# Views
+# 视图
 
-## What is the equivalent of a `UIView` in Flutter?
+## iOS 中的 `UIView` 在 Flutter 中对应什么
 
-On iOS, most of what you create in the UI is done using view objects, which are
-instances of the `UIView` class. These can act as containers for other `UIView`
-classes, which form your layout.
+在iOS中，您在 UI 中创建的大部分内容都是使用视图对象完成的，这些视图对象是 `UIView` 类的实例。这些可以充当其他 `UIView` 类的容器，它们构成了你的布局。
 
-In Flutter, the rough equivalent to a `UIView` is a `Widget`. Widgets don't map
-exactly to iOS views, but while you're getting acquainted with how Flutter works
-you can think of them as "the way you declare and construct UI".
+在 Flutter 中，与 `UIView` 相当的就是 `Widget`。Widget 并不会完全映射到 iOS 视图上，但是当你完全了解 Flutter 的工作原理后，可以将他们视为“你声明和构建 UI 的方式”。
 
-However, these have a few differences to a `UIView`. To start, widgets have a
-different lifespan: they are immutable and only exist until they need to be
-changed. Whenever widgets or their state change, Flutter’s framework creates
-a new tree of widget instances. In comparison, an iOS view is not recreated when
-it changes, but rather it's a mutable entity that is drawn once and doesn't
-redraw until it is invalidated using `setNeedsDisplay()`.
+当然，这些与 `UIView` 有些差异。开始，widget 具有不同的生命周期：它们是不可变的，只有在它们需要改变时才存在。每当 widget 或它的状态改变，Flutter 框架会创建一个新的 widget 实例的树。相比之下， iOS 视图在改变时不会被重新创建，而它是一个可变实体，只能绘制一次，在使用 `setNeedsDisplay()` 失效之前不会重新绘制。
 
-Furthermore, unlike `UIView`, Flutter’s widgets are lightweight, in part due
-to their immutability. Because they aren't views themselves, and aren't directly
-drawing anything, but rather are a description of the UI and its semantics that get
-"inflated" into actual view objects under the hood.
+此外，与 `UIView` 不同， Flutter 的 widget 是轻量的,在某种程度上得益于 widget 的不可变性。因为他们自身并不是视图，也不会直接绘制任何东西，而是 UI 的描述和它的语义，它们在实际视图对象下面“膨胀”。
 
-Flutter includes the [Material Components](https://material.io/develop/flutter/)
-library. These are widgets that implement the
-[Material Design guidelines](https://material.io/design/). Material Design is a
-flexible design system [optimized for all
-platforms](https://material.io/design/platform-guidance/cross-platform-adaptation.html#cross-platform-guidelines),
-including iOS.
+Flutter 包含了 [Material 组件](https://material.io/develop/flutter/) 库。这些 widget 实现了 [Material Design 设计规范](https://material.io/design/) 。Material Design 是针对所有平台（包括iOS）优化的灵活设计系统。
 
-But Flutter is flexible and expressive enough to implement any design language.
-On iOS, you can use the [Cupertino widgets](https://flutter.io/widgets/cupertino/)
-to produce an interface that looks like
-[Apple's iOS design language](https://developer.apple.com/design/resources/).
+尽管 Flutter 的灵活性和表现力足以实现任何设计语言，在 iOS 中，您依然可以使用 [Cupertino widgets](https://flutter.io/widgets/cupertino/) 来生成看起来像 [Apple iOS 设计语言](https://developer.apple.com/design/resources/) 的界面。
 
-## How do I update `Widget`s?
+## 如何更新 `Widget` ？
 
 To update your views on iOS, you directly mutate them. In Flutter, widgets are
 immutable and not updated directly. Instead, you have to manipulate the
 widget’s state.
+
+要在 iOS 中更新视图，你可以直接改变它们。在 Flutter 中，widget 是不可变的，不能直接更新。相反，你必须操作 widget 的状态。
 
 This is where the concept of Stateful vs Stateless widgets
 comes in. A `StatelessWidget` is just what it sounds like&mdash;a widget with no
@@ -273,7 +246,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-## How do I animate a Widget?
+## 如何给 Widget 添加动画？
 
 In iOS, you create an animation by calling the
 `animate(withDuration:animations:)` method on a view. In Flutter,
@@ -472,9 +445,9 @@ Widget build(BuildContext context) {
 }
 {% endprettify %}
 
-# Navigation
+# 导航
 
-## How do I navigate between pages?
+## 如何在页面间进行导航？
 
 In iOS, to travel between view controllers, you can use a
 `UINavigationController` that manages the stack of view controllers to
@@ -536,7 +509,7 @@ location, `pop()` the stack with the result:
 Navigator.of(context).pop({"lat":43.821757,"long":-79.226392});
 {% endprettify %}
 
-## How do I navigate to another app?
+## 如何跳转到其他应用程序？
 
 In iOS, to send the user to another application, you use a
 specific URL scheme. For the system level apps, the scheme
@@ -1936,9 +1909,10 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-# Interacting with hardware, third party services and the platform
+# 与硬件，第三方服务和平台进行交互
 
-## How do I interact with the platform, and with platform native code?
+
+## 如何与平台以及平台原生代码交互？
 
 Flutter doesn't run code directly on the underlying platform; rather, the Dart code
 that makes up a Flutter app is run natively on the device, "sidestepping" the SDK
@@ -1968,16 +1942,16 @@ If you can't find a plugin on Pub that fits your needs, you can
 [write your own](/developing-packages/)
 and [publish it on Pub](/developing-packages/#publish).
 
-## How do I access the GPS sensor?
+## 如何使用 GPS 传感器？
 
 Use the [`location`](https://pub.dartlang.org/packages/location) community plugin.
 
-## How do I access the camera?
+## 如何使用相机服务?
 
 The [`image_picker`](https://pub.dartlang.org/packages/image_picker) plugin is popular
 for accessing the camera.
 
-## How do I log in with Facebook?
+## 如何使用 Facebook 进行登录?
 
 To log in with Facebook, use the
 [`flutter_facebook_login`](https://pub.dartlang.org/packages/flutter_facebook_login) community plugin.
@@ -2011,37 +1985,27 @@ Android: you fire off a message and let the receiver process and emit a result
 back to you. In this case, the receiver is code running on the native side
 on Android or iOS.
 
-# Databases and local storage
+# 数据库和本地存储
 
-## How do I access `UserDefaults` in Flutter?
+## Flutter 中如何使用 `UserDefaults` ？
 
-In iOS, you can store a collection of key-value pairs using a property list,
-known as the `UserDefaults`.
+在 iOS 中，您可以使用属性列表（也就是 `UserDefaults` ）来存储键值对的集合。
 
-In Flutter, access equivalent functionality using the
-[Shared Preferences plugin](https://pub.dartlang.org/packages/shared_preferences).
-This plugin wraps the functionality of both `UserDefaults` and the Android
-equivalent, `SharedPreferences`.
+在 Flutter 中，使用 [Shared Preferences](https://pub.dartlang.org/packages/shared_preferences) 插件访问同等功能。这个插件包装了 `UserDefaults` 和 Android `SharedPreferences` 同等的功能。
 
-## What is the equivalent to CoreData in Flutter?
+## iOS 中的 CoreData 在 Flutter 中对应什么
 
-In iOS, you can use CoreData to store structured data. This is simply a
-layer on top of an SQL database, making it easier to make queries that
-relate to your models.
 
-In Flutter, access this functionality using the
-[SQFlite](https://pub.dartlang.org/packages/sqflite) plugin.
+在 iOS 中，您可使用 CoreData 来存储结构化数据,这是 SQL 数据库的更高级的抽象概念，使查询与您模型相关联变得更加容易。
 
-# Notifications
+在 Flutter 中，使用 [SQFlite](https://pub.dartlang.org/packages/sqflite) 插件访问该功能。
 
-## How do I set up push notifications?
+# 通知
 
-In iOS, you need to register your app on the developer portal to allow
-push notifications.
+## 如何设置推送通知？
 
-In Flutter, access this functionality using the
-`firebase_messaging` plugin.
+在 iOS 中，您需要在开发者平台上注册您的应用程序以允许推送通知。
 
-For more information on using the Firebase Cloud Messaging API, see the
-[`firebase_messaging`](https://pub.dartlang.org/packages/firebase_messaging)
-plugin documentation.
+在 Flutter 中 ，使用 `firebase_messaging` 插件访问此功能。
+
+有关  Firebase Cloud Messaging API 的更多使用信息，请参阅 [`firebase_messaging`](https://pub.dartlang.org/packages/firebase_messaging) 插件文档。
