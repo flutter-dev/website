@@ -31,42 +31,21 @@ Flutter 包含了 [Material 组件](https://material.io/develop/flutter/) 库。
 
 ## 如何更新 `Widget` ？
 
-To update your views on iOS, you directly mutate them. In Flutter, widgets are
-immutable and not updated directly. Instead, you have to manipulate the
-widget’s state.
-
 要在 iOS 中更新视图，你可以直接改变它们。在 Flutter 中，widget 是不可变的，不能直接更新。相反，你必须操作 widget 的状态。
 
-This is where the concept of Stateful vs Stateless widgets
-comes in. A `StatelessWidget` is just what it sounds like&mdash;a widget with no
-state attached.
+这就是有状态的 vs 无状态的 widget 概念出现的地方。`StatelessWidget` 犹如其名&mdash;一个没有附加状态的 widget。
 
-`StatelessWidgets` are useful when the part of the user interface you are
-describing does not depend on anything other than the initial configuration
-information in the widget.
+当你描述的用户界面部分不依赖于 widget 的初始配置信息以外的其他任何内容时，`StatelessWidgets` 就非常有用。
 
-For example, in iOS, this is similar to placing a `UIImageView` with
-your logo as the `image`. If the logo is not changing during runtime,
-use a `StatelessWidget` in Flutter.
+举个例子，在 iOS 中，这与将你的 logo 作为 `image` 放入 `UIImageView` 中类似。如果在运行期间 logo 不改变，在 Flutter 中使用 `StatelessWidget`。
 
-If you want to dynamically change the UI based on data received after making an
-HTTP call, use a `StatefulWidget`. After the HTTP call has
-completed, tell the Flutter framework that the widget’s `State` is
-updated, so it can update the UI.
+如果你想要基于 HTTP 调用后收到的数据来动态改变 UI ，那么使用 `StatefulWidget`。在 HTTP 调用完成后，告诉 Flutter 框架 widget 的 `State` 已更新，以便它可以更新 UI。
 
-The important difference between stateless and
-stateful widgets is that `StatefulWidget`s have a `State` object that stores
-state data and carries it over across tree rebuilds, so it's not lost.
+无状态和有状态的 widget 之间重要的区别就是 `StatefulWidget` 具有一个 `State` 对象，用于存储状态数据并且跨树重建执行，因此不会丢失。
 
-If you are in doubt, remember this rule: if a widget changes outside of
-the `build` method (because of runtime user interactions, for example), it’s stateful.
-If the widget never changes, once built, it's stateless.
-However, even if a widget is stateful, the containing parent widget can still
-be stateless if it isn’t itself reacting to those changes (or other inputs).
+如有疑问，请记住这个准则：如果 widget 在 `build` 方法之外改变（例如，由于运行时用户交互），那它是有状态的。如果 widget 永远不会改变，一旦构建，它就是无状态的。然而，即使一个 widget 是有状态的，如果包含的父 widget 本身没有对这些改变（或其他输入）作出反应，它仍然可以是无状态的。
 
-The following example shows how to use a `StatelessWidget`. A common
-`StatelessWidget` is the `Text` widget. If you look at the implementation of
-the `Text` widget you'll find it subclasses `StatelessWidget`.
+下面的例子展示了如何使用 `StatelessWidget`。一个常见的 `StatelessWidget` 是 `Text` widget。如果你看看 `Text` widget 的实现，你就会发现它是 `StatelessWidget` 的子类。
 
 <!-- skip -->
 {% prettify dart %}
@@ -76,17 +55,13 @@ new Text(
 );
 {% endprettify %}
 
-If you look at the code above, you might notice that the `Text` widget
-carries no explicit state with it. It renders what is passed in its
-constructors and nothing more.
+如果你看一下上面的代码，你或许会注意到 `Text` widget 并没有携带明确的状态。它呈现了构造函数中传递的内容，仅此而已。
 
-But, what if you want to make "I Like Flutter" change dynamically, for example
-when clicking a `FloatingActionButton`?
+但是，如果你想要“我喜欢 Flutter ”动态变化，例如当点击 `FloatingActionButton` 时会发生什么？
 
-To achieve this, wrap the `Text` widget in a `StatefulWidget` and
-update it when the user clicks the button.
+要实现这个，将 `Text` widget 包装在 `StatefulWidget` 中，并且当用户点击按钮的时候更新它。
 
-For example:
+例如:
 
 <!-- skip -->
 {% prettify dart %}
@@ -137,14 +112,12 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-## How do I lay out my widgets? Where is my Storyboard?
+## 如何布局 widget ？ Storyboard 在哪？
 
-In iOS, you might use a Storyboard file to organize your views and set
-constraints, or you might set your constraints programmatically in your view
-controllers. In Flutter, declare your layout in code by composing
-a widget tree.
+在 iOS 中，你或许会使用一个 Storyboard 文件来组织你的视图并设置约束，或者你可能在视图控制器中以编程方式来设置约束。在 Flutter 中，通过编写一个 widget 树来在代码中声明你的布局。
 
-The following example shows how to display a simple widget with padding:
+接下来的例子展示了如何去显示一个带有内边距的简单 widget ：
+
 
 <!-- skip -->
 {% prettify dart %}
@@ -167,22 +140,15 @@ Widget build(BuildContext context) {
 }
 {% endprettify %}
 
-You can add padding to any widget, which mimics the functionality of
-constraints in iOS.
+你可以为任何 widget 添加内边距，这些模仿 iOS 中的约束功能。
 
-You can view the layouts that Flutter has to offer in the [widget
-catalog](/widgets/layout/).
+你可以查看 Flutter 在 [widget 目录](/widgets/layout/)中必须提供的布局。
 
-## How do I add or remove a component from my layout?
+## 如何从布局中添加或移除组件？
 
-In iOS, you call `addSubview()` on the parent, or `removeFromSuperview()`
-on a child view to dynamically add or remove child views. In Flutter, because
-widgets are immutable there is no direct equivalent to `addSubview()`.
-Instead, you can pass a function to the parent that returns a widget, and
-control that child's creation with a boolean flag.
+在 iOS 中，在父视图中调用 `addSubview()` ，或着在子视图中调用 `removeFromSuperview()` 来动态添加或移除子视图。在 Flutter 中，由于 widget 是不可变的，不能直接像 `addSubview()` 那样。你可以将函数传递给返回 widget 的父类，并用布尔标志来控制子类的创建。
 
-The following example shows how to toggle between two widgets when the user clicks
-the `FloatingActionButton`:
+接下来的例子展示了当用户点击了 `FloatingActionButton` 时，两个 widget 之间如何切换：
 
 <!-- skip -->
 {% prettify dart %}
@@ -248,28 +214,15 @@ class _SampleAppPageState extends State<SampleAppPage> {
 
 ## 如何给 Widget 添加动画？
 
-In iOS, you create an animation by calling the
-`animate(withDuration:animations:)` method on a view. In Flutter,
-use the animation library to wrap widgets inside an animated widget.
+在 iOS 中，通过在视图上调用 `animate(withDuration:animations:)` 方法来创建动画。在Flutter 中，使用动画库将 widget 封装进动画 widget 中。
 
-In Flutter, use an `AnimationController` which is an `Animation<double>`
-that can pause, seek, stop and reverse the animation. It requires a `Ticker`
-that signals when vsync happens and produces a linear interpolation between
-0 and 1 on each frame while it's running. You then create one or more
-`Animation`s and attach them to the controller.
+在 Flutter 中，使用 `AnimationController` ，这是个可以暂停，寻找，停止，反转动画的 `Animation<double>` 。它需要一个`Ticker`，用于在 vsync 发生时发出信号，并在每帧运行时在 0 和 1 之间产生线性插值。然后，您创建一个或多个 `Animation` 并将它们附加到控制器。
 
-For example, you might use `CurvedAnimation` to implement an animation
-along an interpolated curve. In this sense, the controller
-is the "master" source of the animation progress and the `CurvedAnimation`
-computes the curve that replaces the controller's default linear motion.
-Like widgets, animations in Flutter work with composition.
+例如，你可能会使用 `CurvedAnimation` 来实现沿插值曲线的动画。从这个意义上说，控制器是动画过程的“主要”源，而且  `CurvedAnimation` 计算替代控制器默认的线性运动的曲线。与 widget ，Flutter 中的动画也用于合成。
 
-When building the widget tree you assign the `Animation` to an animated
-property of a widget, such as the opacity of a `FadeTransition`, and tell the
-controller to start the animation.
+当构建 widget 树时，将 `Animation` 赋值给 widget 的动画属性，例如 `FadeTransition` 的不透明度，并且告诉控制器开始动画。
 
-The following example shows how to write a `FadeTransition` that fades the widget
-into a logo when you press the `FloatingActionButton`:
+接下来的列子展示了如何编写 `FadeTransition` ，当你点击 `FloatingActionButton` 时将 widget 渐渐融入进 logo 中 ：
 
 <!-- skip -->
 {% prettify dart %}
@@ -340,21 +293,13 @@ class _MyFadeTest extends State<MyFadeTest> with TickerProviderStateMixin {
 }
 {% endprettify %}
 
-For more information, see
-[Animation & Motion widgets](/widgets/animation/),
-the [Animations tutorial](/tutorials/animation),
-and the [Animations overview](/animations/).
+有关更多信息，请查阅 [动画 & 动画 widget](/widgets/animation/) ， [动画教程](/tutorials/animation) ， [动画概览](/animations/)。
 
-## How do I draw to the screen?
+## 如何在屏幕上绘制？
 
-On iOS, you use `CoreGraphics` to draw lines and shapes to the
-screen. Flutter has a different API based on the `Canvas` class, with two
-other classes that help you draw: `CustomPaint` and `CustomPainter`, the
-latter of which implements your algorithm to draw to the canvas.
+在 iOS 中，使用 `CoreGraphics` 在屏幕上绘制线和形状。 Flutter 有和基于 `Canvas` 类的不同 API ，还有两个帮助你来进行绘制的类，`CustomPaint` 和 `CustomPainter` ，后面的类是实现绘制到画布上的算法。
 
-To learn how to implement a signature painter in Flutter, see Collin's answer on
-[StackOverflow](https://stackoverflow.com/questions/46241071/create-signature-area-
-for-mobile-app-in-dart-flutter).
+想要了解如何在 Flutter 中实现签名器（ signature painter ），请查看 Collin 在 [StackOverflow](https://stackoverflow.com/questions/46241071/create-signature-area-for-mobile-app-in-dart-flutter) 上的回答。
 
 <!-- skip -->
 {% prettify dart %}
@@ -402,22 +347,15 @@ class SignatureState extends State<Signature> {
 }
 {% endprettify %}
 
-## Where is the widget's opacity?
+## widget 的不透明度在哪？
 
-On iOS, everything has .opacity or .alpha. In Flutter, most of the time you need to
-wrap a widget in an Opacity widget to accomplish this.
+在 iOS 中视图都有 .opacity 或 .alpha。在 Flutter 中，大多数情况下你需要将 widget 封装进一个 Opacity widget 中来实现这个。
 
-## How do I build custom widgets?
+## 如何构建自定义 widget？
 
-In iOS, you typically subclass `UIView`, or use a pre-existing view, to
-override and implement methods that achieve the desired behavior. In
-In Flutter, build a custom widget by
-[composing](/technical-overview/#everythings-a-widget) smaller widgets
-(instead of extending them).
+在 iOS 中，通常会对 `UIView` 进行子类化，或使用已有的视图来重写和实现期望所需行为的方法。在 Flutter 中，通过[组合](/technical-overview/#everythings-a-widget)轻量 widget (而不是扩展它们)来构建自定义 widget。 
 
-For example, how do you build a `CustomButton` that takes a label in
-the constructor? Create a CustomButton that composes a `RaisedButton` with a label,
-rather than by extending `RaisedButton`:
+例如，你如何构建一个在构造函数中使用标签的 `CustomButton`？创建一个使用标签组合 `RaisedButton` 的 CustomButton ，而不是在 `RaisedButton` 上进行扩展：
 
 <!-- skip -->
 {% prettify dart %}
@@ -449,24 +387,16 @@ Widget build(BuildContext context) {
 
 ## 如何在页面间进行导航？
 
-In iOS, to travel between view controllers, you can use a
-`UINavigationController` that manages the stack of view controllers to
-display.
+在 iOS 中，为了在视图控制器之间切换，可以使用管理要显示视图控制器堆栈的 `UINavigationController` 。
 
-Flutter has a similar implementation, using a `Navigator` and
-`Routes`. A `Route` is an abstraction for a “screen” or “page” of an app, and
-a `Navigator` is a [widget](technical-overview/#everythings-a-widget)
-that manages routes. A route roughly maps to a
-`UIViewController`. The navigator works in a similar way to the iOS
-`UINavigationController`, in that it can `push()` and `pop()` routes depending
-on whether you want to navigate to, or back from, a view.
+Flutter 有一个类似的实现，使用 `Navigator` 和 `Routes`。`Route` 是应用程序“屏幕”或“页面”的抽象，`Navigator` 是一种管理路由的 [widget](technical-overview/#everythings-a-widget) 。一个路由大致上映射一个 `UIViewController` 。navigator 与 iOS 的 `UINavigationController` 工作原理相似，因为它根据是否导航到视图或从视图返回进行 `push()` 和 `pop()` 路由。
 
-To navigate between pages, you have a couple options:
+在两个页面间导航，你有几个选项：
 
-* Specify a `Map` of route names. (MaterialApp)
-* Directly navigate to a route. (WidgetApp)
+* 指定路由名称的映射。（ MaterialApp ）
+* 直接导航到路由。（ WidgetApp ）
 
-The following example builds a Map.
+以下示例构建一个Map。
 
 <!-- skip -->
 {% prettify dart %}
@@ -482,27 +412,24 @@ void main() {
 }
 {% endprettify %}
 
-Navigate to a route by `push`ing its name to the `Navigator`.
+通过将其名称 `push` 到 `Navigator` 来导航到路由。
 
 <!-- skip -->
 {% prettify dart %}
 Navigator.of(context).pushNamed('/b');
 {% endprettify %}
 
-The `Navigator` class handles routing in Flutter and is used to get
-a result back from a route that you have pushed on the stack. This is done
-by `await`ing on the `Future` returned by `push()`.
+`Navigator` 类在处理 Flutter 中的路由，并用于从已经推到堆栈中的路由中获取回调结果。
+这是通过 `push()` 返回的 `Future` 上的 `await` 完成的。
 
-For example, to start a ‘location’ route that lets the user select their
-location, you might do the following:
+例如，要启动允许用户选择其位置的“位置”路由，您可以执行以下操作：
 
 <!-- skip -->
 {% prettify dart %}
 Map coordinates = await Navigator.of(context).pushNamed('/location');
 {% endprettify %}
 
-And then, inside your ‘location’ route, once the user has selected their
-location, `pop()` the stack with the result:
+然后，在你的'位置'路由中，一旦用户选择了他们的位置，`pop()` 堆栈的结果是：
 
 <!-- skip -->
 {% prettify dart %}
@@ -511,30 +438,18 @@ Navigator.of(context).pop({"lat":43.821757,"long":-79.226392});
 
 ## 如何跳转到其他应用程序？
 
-In iOS, to send the user to another application, you use a
-specific URL scheme. For the system level apps, the scheme
-depends on the app. To implement this functionality in Flutter,
-create a native platform integration, or use an existing
-[plugin](#plugins), such as
-[`url_launcher`](https://pub.dartlang.org/packages/url_launcher).
+在iOS中，要将用户发送给其他应用程序，请使用特定的URL方案。对于系统级应用程序，该方案取决于应用程序。要在Flutter中实现此功能，请创建本地平台集成，或使用现有[插件](#plugins)（如 [`url_launcher`](https://pub.dartlang.org/packages/url_launcher) ）。
 
-# Threading & asynchronicity
 
-## How do I write asynchronous code?
+# 线程 & 异步
 
-Dart has a single-threaded execution model, with support for `Isolate`s (a way
-to run Dart code on another thread), an event loop, and asynchronous programming.
-Unless you spawn an `Isolate`, your Dart code runs in the main UI thread and is
-driven by an event loop. Flutter’s event loop is equivalent to the iOS main
-loop&mdash;that is, the `Looper` that is attached to the main thread.
+## 如何编写异步代码？
 
-Dart’s single-threaded model doesn’t mean you are required to run everything as
-a blocking operation that causes the UI to freeze. Instead,
-use the asynchronous facilities that the Dart language provides, such as
-`async`/`await`, to perform asynchronous work.
+Dart 有一个单线程执行模型，支持 `Isolate` （一种在另一个线程上运行 Dart 代码的方式），一个事件循环和异步编程。除非您生成 `Isolate` ，否则您的 Dart 代码将在主 UI 线程中运行，并由事件循环驱动。 Flutter 的事件循环相当于 iOS 主循环&mdash;即连接到主线程的 `Looper`。
 
-For example, you can run network code without causing the UI to hang by using
-`async`/`await` and letting Dart do the heavy lifting:
+Dart 的单线程模型并不意味着您需要将所有操作都作为导致 UI 冻结的阻止操作运行。相反，使用 Dart 语言提供的异步工具（例如 `async`/`await` ）来执行异步工作。
+
+例如，您可以运行网络代码，而不会导致UI通过使用 `async`/`await` 挂起，并让 Dart 执行繁重的操作：
 
 <!-- skip -->
 {% prettify dart %}
@@ -547,10 +462,9 @@ loadData() async {
 }
 {% endprettify %}
 
-Once the `await`ed network call is done, update the UI by calling `setState()`,
-which triggers a rebuild of the widget sub-tree and updates the data.
+一旦 `await` 网络调用完成，通过调用 `setState()` 来更新UI，这会触发重构 widget 子树并更新数据。
 
-The following example loads data asynchronously and displays it in a `ListView`:
+以下示例异步加载数据并将其显示在 `ListView` 中：
 
 <!-- skip -->
 {% prettify dart %}
@@ -623,10 +537,9 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-Refer to the next section for more information on doing work in the
-background, and how Flutter differs from iOS.
+有关在后台执行工作的更多信息，请参阅下一节，以及 Flutter 与 iOS 的不同之处。
 
-## How do you move work to a background thread?
+## 如何将工作移至后台线程？
 
 Since Flutter is single threaded and runs an event loop (like Node.js), you
 don't have to worry about thread management or spawning background threads. If
@@ -635,8 +548,12 @@ you can safely use `async`/`await` and you're done. If, on the other
 hand, you need to do computationally intensive work that keeps the CPU busy,
 you want to move it to an `Isolate` to avoid blocking the event loop.
 
+由于 Flutter 是单线程的并且运行事件循环（如 Node.js ），因此您不必担心线程管理或产生后台线程。如果您正在执行 I/O 绑定工作（如磁盘访问或网络调用），那么您可以安全地使用 `async`/`await` 并完成。另一方面，如果您需要进行计算密集型工作以保持 CPU 繁忙，则您需要将其移至 `Isolate` 以避免阻塞事件循环。
+
 For I/O-bound work, declare the function as an `async` function,
 and `await` on long-running tasks inside the function:
+
+对于 I/O 绑定的工作，将函数声明为 `async` 函数，并在函数内的长时间运行的任务中声明 `await`：
 
 <!-- skip -->
 {% prettify dart %}
@@ -652,17 +569,26 @@ loadData() async {
 This is how you typically do network or database calls, which are both
 I/O operations.
 
+这就是通常进行网络或数据库调用的方式，它们都是 I/O 操作
+
 However, there are times when you might be processing a large amount of data and
 your UI hangs. In Flutter, use `Isolate`s to take advantage of
 multiple CPU cores to do long-running or computationally intensive tasks.
+
+但是，有时您可能正在处理大量数据，并且 UI 挂起。在 Flutter 中，使用 `Isolate` 来利用多个 CPU 内核来执行长时间运行或计算密集型任务。
 
 Isolates are separate execution threads that do not share any memory
 with the main execution memory heap. This means you can’t access variables from
 the main thread, or update your UI by calling `setState()`. Isolates are true to
 their name, and cannot share memory (in the form of static fields, for example).
 
+隔离是不共享任何内存的独立执行线程与主执行内存堆。这意味着你不能从主线程访问变量，或者通过调用 `setState()` 来更新你的 UI 。隔离对他们的名字是真实的，并且不能共享内存（例如以静态字段的形式）。
+
+
 The following example shows, in a simple isolate, how to share data back to
 the main thread to update the UI.
+
+以下示例以简单的隔离方式显示如何将数据共享回主线程以更新 UI 。
 
 <!-- skip -->
 {% prettify dart %}
@@ -710,7 +636,9 @@ Here, `dataLoader()` is the `Isolate` that runs in its own separate execution th
 In the isolate you can perform more CPU intensive processing (parsing a big JSON, for
 example), or perform computationally intensive math, such as encryption or signal processing.
 
-You can run the full example below:
+在这里，  `dataLoader()` 是在独立执行线程中运行的 `Isolate` 。在隔离区中，您可以执行更多 CPU 密集型处理（例如解析大型 JSON ），或者执行计算密集型数学运算或信号处理。
+
+您可以运行下面的完整示例:
 
 {% prettify dart %}
 import 'dart:convert';
@@ -833,14 +761,18 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-## How do I make network requests?
+## 如何进行网络请求？
 
 Making a network call in Flutter is easy when you use the popular
 [`http` package](https://pub.dartlang.org/packages/http). This abstracts
 away a lot of the networking that you might normally implement yourself,
 making it simple to make network calls.
 
+在使用流行的 [`http` 包](https://pub.dartlang.org/packages/http)时，使用 Flutter 进行网络访问非常简单。这将您通常自己实现的大量网络抽象出来，使网络访问变得简单。
+
 To use the `http` package, add it to your dependencies in `pubspec.yaml`:
+
+要使用 `http` 包，将它添加到 `pubspec.yaml` 中的依赖关系中：
 
 <!-- skip -->
 {% prettify yaml %}
@@ -850,6 +782,8 @@ dependencies:
 {% endprettify %}
 
 To make a network call, call `await` on the `async` function `http.get()`:
+
+要进行网络调用，请在 `async` 函数 `http.get()` 上调用 `await` ：
 
 <!-- skip -->
 {% prettify dart %}
