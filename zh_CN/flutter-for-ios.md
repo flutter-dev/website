@@ -541,17 +541,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
 
 ## 如何将工作移至后台线程？
 
-Since Flutter is single threaded and runs an event loop (like Node.js), you
-don't have to worry about thread management or spawning background threads. If
-you're doing I/O-bound work, such as disk access or a network call, then
-you can safely use `async`/`await` and you're done. If, on the other
-hand, you need to do computationally intensive work that keeps the CPU busy,
-you want to move it to an `Isolate` to avoid blocking the event loop.
-
 由于 Flutter 是单线程的并且运行事件循环（如 Node.js ），因此您不必担心线程管理或产生后台线程。如果您正在执行 I/O 绑定工作（如磁盘访问或网络调用），那么您可以安全地使用 `async`/`await` 并完成。另一方面，如果您需要进行计算密集型工作以保持 CPU 繁忙，则您需要将其移至 `Isolate` 以避免阻塞事件循环。
-
-For I/O-bound work, declare the function as an `async` function,
-and `await` on long-running tasks inside the function:
 
 对于 I/O 绑定的工作，将函数声明为 `async` 函数，并在函数内的长时间运行的任务中声明 `await`：
 
@@ -566,27 +556,12 @@ loadData() async {
 }
 {% endprettify %}
 
-This is how you typically do network or database calls, which are both
-I/O operations.
-
 这就是通常进行网络或数据库调用的方式，它们都是 I/O 操作
-
-However, there are times when you might be processing a large amount of data and
-your UI hangs. In Flutter, use `Isolate`s to take advantage of
-multiple CPU cores to do long-running or computationally intensive tasks.
 
 但是，有时您可能正在处理大量数据，并且 UI 挂起。在 Flutter 中，使用 `Isolate` 来利用多个 CPU 内核来执行长时间运行或计算密集型任务。
 
-Isolates are separate execution threads that do not share any memory
-with the main execution memory heap. This means you can’t access variables from
-the main thread, or update your UI by calling `setState()`. Isolates are true to
-their name, and cannot share memory (in the form of static fields, for example).
-
 隔离是不共享任何内存的独立执行线程与主执行内存堆。这意味着你不能从主线程访问变量，或者通过调用 `setState()` 来更新你的 UI 。隔离对他们的名字是真实的，并且不能共享内存（例如以静态字段的形式）。
 
-
-The following example shows, in a simple isolate, how to share data back to
-the main thread to update the UI.
 
 以下示例以简单的隔离方式显示如何将数据共享回主线程以更新 UI 。
 
@@ -631,10 +606,6 @@ Future sendReceive(SendPort port, msg) {
   return response.first;
 }
 {% endprettify %}
-
-Here, `dataLoader()` is the `Isolate` that runs in its own separate execution thread.
-In the isolate you can perform more CPU intensive processing (parsing a big JSON, for
-example), or perform computationally intensive math, such as encryption or signal processing.
 
 在这里，  `dataLoader()` 是在独立执行线程中运行的 `Isolate` 。在隔离区中，您可以执行更多 CPU 密集型处理（例如解析大型 JSON ），或者执行计算密集型数学运算或信号处理。
 
@@ -763,14 +734,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
 
 ## 如何进行网络请求？
 
-Making a network call in Flutter is easy when you use the popular
-[`http` package](https://pub.dartlang.org/packages/http). This abstracts
-away a lot of the networking that you might normally implement yourself,
-making it simple to make network calls.
-
 在使用流行的 [`http` 包](https://pub.dartlang.org/packages/http)时，使用 Flutter 进行网络访问非常简单。这将您通常自己实现的大量网络抽象出来，使网络访问变得简单。
-
-To use the `http` package, add it to your dependencies in `pubspec.yaml`:
 
 要使用 `http` 包，将它添加到 `pubspec.yaml` 中的依赖关系中：
 
@@ -780,8 +744,6 @@ dependencies:
   ...
   http: ^0.11.3+16
 {% endprettify %}
-
-To make a network call, call `await` on the `async` function `http.get()`:
 
 要进行网络调用，请在 `async` 函数 `http.get()` 上调用 `await` ：
 
@@ -802,20 +764,13 @@ import 'package:http/http.dart' as http;
 }
 {% endprettify %}
 
-## How do I show the progress of a long-running task?
+## 如何显示长线任务的进度？
 
-In iOS, you typically use a `UIProgressView` while executing a
-long-running task in the background.
+在 iOS 中，通常使用 `UIProgressView` 来显示后台正在执行的长线任务。
 
-In Flutter, use a `ProgressIndicator` widget.
-Show the progress programmatically by controlling when it's rendered
-through a boolean flag. Tell Flutter to update its state before your
-long-running task starts, and hide it after it ends.
+在 Flutter 中，使用 `ProgressIndicator`。通过控制何时通过布尔标志显示，以编程方式显示进度。告诉 Flutter 在长线任务开始前更新其状态，并在结束后隐藏它。
 
-In the example below, the build function is separated into three different
-functions. If `showLoadingDialog()` is `true` (when `widgets.length == 0`),
-then render the `ProgressIndicator`. Otherwise, render the
-`ListView` with the data returned from a network call.
+在下面的示例中，build 函数被分为三个不同的函数。如果 `showLoadingDialog()` 为 `true`（当 `widgets.length == 0` ），则渲染 `ProgressIndicator` 。否则，使用网络调用返回的数据呈现 `ListView` 。
 
 <!-- skip -->
 {% prettify dart %}
@@ -902,21 +857,17 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-# Project structure, localization, dependencies and assets
+# 项目结构，本地化，依赖和资源
 
-## How do I include image assets for Flutter? What about multiple resolutions?
+## 如何图片资源加入到 Flutter ？多分辨率怎么办？
 
-While iOS treats images and assets as distinct items, Flutter apps have only
-assets. Resources that are placed in the `Images.xcasset` folder on iOS,
-are placed in an assets folder for Flutter.
-As with iOS, assets are any type of file, not just images.
-For example, you might have a JSON file located in the `my-assets` folder:
+尽管 iOS 将图像和资源视为不同的项目，但 Flutter 应用程序只有资源。在iOS上放置在 `Images.xcasset` 文件夹中的资源将放置在 Flutter 的资源文件夹中。与 iOS 一样，资源是任何类型的文件，而不仅仅是图片。例如，您可能在 `my-assets` 文件夹中有一个 JSON 文件:
 
 ```
 my-assets/data.json
 ```
 
-Declare the asset in the `pubspec.yaml` file:
+在 `pubspec.yaml` 文件中声明资源：
 
 <!-- skip -->
 {% prettify yaml %}
@@ -924,8 +875,7 @@ assets:
  - my-assets/data.json
 {% endprettify %}
 
-And then access it from code using an
-[`AssetBundle`](https://docs.flutter.io/flutter/services/AssetBundle-class.html):
+然后使用 [`AssetBundle`](https://docs.flutter.io/flutter/services/AssetBundle-class.html) 从代码访问它：
 
 <!-- skip -->
 {% prettify dart %}
@@ -937,19 +887,11 @@ Future<String> loadAsset() async {
 }
 {% endprettify %}
 
-For images, Flutter follows a simple density-based format like iOS. Image assets
-might be `1.0x`, `2.0x`, `3.0x`, or any other multiplier. The so-called
-[`devicePixelRatio`](https://docs.flutter.io/flutter/dart-ui/Window/devicePixelRatio.html)
-expresses the ratio of physical pixels in a single logical pixel.
+对于图片，Flutter 遵循一种简单的基于密度的格式，如 iOS 图片资源可能是 `1.0x`， `2.0x`， `3.0x` 或任何其他倍数。所谓的 [`devicePixelRatio`](https://docs.flutter.io/flutter/dart-ui/Window/devicePixelRatio.html) 表示单个逻辑像素中物理像素的比例。
 
-Assets are located in any arbitrary folder&mdash;Flutter has no
-predefined folder structure. You declare the assets (with location) in
-the `pubspec.yaml` file, and Flutter picks them up.
+资源位于任意文件夹中&mdash; Flutter 没有预定义的文件夹结构。在 `pubspec.yaml` 文件中声明资源（包含位置），Flutter 将其识别。
 
-For example, to add an image called `my_icon.png` to your Flutter
-project, you might decide to store it in a folder arbitrarily called `images`.
-Place the base image (1.0x) in the `images` folder, and the
-other variants in sub-folders named after the appropriate ratio multiplier:
+例如，要将名为 `my_icon.png` 的图片添加到您的 Flutter 项目中，您可能决定将其存储在任意称为 `images` 的文件夹中。将基础图像（1.0x）放置在 `images` 文件夹中，并将其他变体放在以相应比率乘数命名的子文件夹中：
 
 ```
 images/my_icon.png       // Base: 1.0x image
@@ -957,7 +899,7 @@ images/2.0x/my_icon.png  // 2.0x image
 images/3.0x/my_icon.png  // 3.0x image
 ```
 
-Next, declare these images in the `pubspec.yaml` file:
+接下来，在 `pubspec.yaml` 文件中声明这些图像：
 
 <!-- skip -->
 {% prettify yaml %}
@@ -965,14 +907,14 @@ assets:
  - images/my_icon.jpeg
 {% endprettify %}
 
-You can now access your images using `AssetImage`:
+您现在可以使用 `AssetImage` 访问您的图片：
 
 <!-- skip -->
 {% prettify dart %}
 return new AssetImage("images/a_dot_burr.jpeg");
 {% endprettify %}
 
-or directly in an `Image` widget:
+或者直接在 `Image` widget 中：
 
 <!-- skip -->
 {% prettify dart %}
@@ -982,15 +924,12 @@ Widget build(BuildContext context) {
 }
 {% endprettify %}
 
-For more details, see
-[Adding Assets and Images in Flutter](/assets-and-images).
+更多详情，请查看[在 Flutter 中添加资源和图片](/assets-and-images)。
 
-## Where do I store strings? How do I handle localization?
+## 在哪存储字符串？如何处理本地化？
 
-Unlike iOS, which has the `Localizable.strings` file, Flutter doesn't
-currently have a dedicated system for handling strings. At the moment, the
-best practice is to declare your copy text in a class as static fields and
-access them from there. For example:
+不像 iOS 有 `Localizable.strings` 文件，Flutter 目前没有处理字符串的专用系统。
+目前，最佳做法是将您的副本文本作为静态字段声明并从那里访问它们。例如：
 
 <!-- skip -->
 {% prettify dart %}
@@ -999,17 +938,14 @@ class Strings {
 }
 {% endprettify %}
 
-You can access your strings as such:
+你可以像这样访问你的字符串
 
 <!-- skip -->
 {% prettify dart %}
 new Text(Strings.welcomeMessage)
 {% endprettify %}
 
-By default, Flutter only supports US English for its strings. If you need to
-add support for other languages, include the `flutter_localizations`
-package. You might also need to add Dart's [`intl`](https://pub.dartlang.org/packages/intl)
-package to use i10n machinery, such as date/time formatting.
+默认情况下，Flutter 仅支持美式英语字符串。如果您需要添加对其他语言的支持，请包含 `flutter_localizations` 包。您可能还需要添加 Dart 的 [`intl`](https://pub.dartlang.org/packages/intl) 包以使用 i10n 机器，例如日期/时间格式。
 
 <!-- skip -->
 {% prettify yaml %}
@@ -1022,6 +958,8 @@ dependencies:
 
 To use the `flutter_localizations` package,
 specify the `localizationsDelegates` and `supportedLocales` on the app widget:
+
+要使用 `flutter_localizations` 包，请在应用部件上指定 `localizationsDelegates` 和 `supportedLocales` ：
 
 <!-- skip -->
 {% prettify dart %}
@@ -1042,101 +980,50 @@ new MaterialApp(
 )
 {% endprettify %}
 
-The delegates contain the actual localized values, while the `supportedLocales`
-defines which locales the app supports. The above example uses a `MaterialApp`,
-so it has both a `GlobalWidgetsLocalizations` for the base
-widgets localized values, and a `MaterialWidgetsLocalizations` for the Material
-widgets localizations. If you use `WidgetsApp` for your app, you don't
-need the latter. Note that these two delegates contain "default"
-values, but you'll need to provide one or more delegates for your own app's
-localizable copy, if you want those to be localized too.
+代理包含实际的本地化值，而 `supportedLocales` 定义应用程序支持的区域设置。上面的例子使用了一个 `MaterialApp` ，因此它既有用于基本 widget 本地化值的 `GlobalWidgetsLocalizations` ，也有用于 Material widget 本地化的 `MaterialWidgetsLocalizations` 。如果您为您的应用使用 `WidgetsApp` ，则不需要后者。请注意，这两个代理包含“默认”值，但您需要为您自己的应用的本地化副本提供一个或多个代理 ，如果您希望这些副本本地化。
 
-When initialized, the `WidgetsApp` (or `MaterialApp`) creates a
-[`Localizations`](https://docs.flutter.io/flutter/widgets/Localizations-class.html)
-widget for you, with the delegates you specify.
-The current locale for the device is always accessible from the `Localizations`
-widget from the current context (in the form of a `Locale` object), or using the
-[`Window.locale`](https://docs.flutter.io/flutter/dart-ui/Window/locale.html).
+初始化时，`WidgetsApp` （或 `MaterialApp` ）会为您创建一个 [`Localizations`](https://docs.flutter.io/flutter/widgets/Localizations-class.html) widget，并使用你指定的代理。设备的当前语言环境始终可以从当前上下文的 `Localizations` widget（以 `Locale` 对象的形式）或使用 [`Window.locale`](https://docs.flutter.io/flutter/dart-ui/Window/locale.html) 访问。
 
-To access localized resources, use the `Localizations.of()` method to
-access a specific localizations class that is provided by a given delegate.
-Use the [`intl_translation`](https://pub.dartlang.org/packages/intl_translation)
-package to extract translatable copy to
-[arb](https://code.google.com/p/arb/wiki/ApplicationResourceBundleSpecification)
-files for translating, and importing them back into the app for using them
-with `intl`.
+要访问本地化资源，请使用 `Localizations.of()` 方法访问由给定代理提供的特定本地化类。使用 [`intl_translation`](https://pub.dartlang.org/packages/intl_translation) 包将可翻译的副本提取到 [arb](https://code.google.com/p/arb/wiki/ApplicationResourceBundleSpecification) 文件进行翻译，然后将它们导入到应用程序中以便与 `intl` 一起使用它们。
 
-For further details on internationalization and localization in Flutter, see the
-[internationalization guide](/tutorials/internationalization),
-which has sample code with and without the `intl` package.
+有关Flutter国际化和本地化的更多详细信息，请参阅[国际化指南](/tutorials/internationalization)，其中包含带和不带 `intl` 包的示例代码。
 
-Note that before Flutter 1.0 beta 2, assets defined in Flutter were not
-accessible from the native side, and vice versa, native assets and resources
-weren’t available to Flutter, as they lived in separate folders.
+请注意，在 Flutter 1.0 beta 2 之前，Flutter 中定义的资源无法从本地访问，反之亦然，Flutter 无法使用本地 assets 和资源，因为它们位于单独的文件夹中。
 
-## What is the equivalent of Cocoapods? How do I add dependencies?
+## Cocoapods 在 Flutter 中对应什么？如何添加依赖关系？
 
-In iOS, you add dependencies by adding to your `Podfile`. Flutter uses Dart’s
-build system and the Pub package manager to handle dependencies. The tools
-delegate the building of the native Android and iOS wrapper apps to the
-respective build systems.
+在 iOS 中，您可以通过添加到 `Podfile` 来添加依赖项。 Flutter 使用 Dart 的构建系统和 Pub 包管理器来处理依赖关系。这些工具将原生 Android 和 iOS 包装应用程序的构建委托给相应的构建系统。
 
-While there is a Podfile in the iOS folder in your
-Flutter project, only use this if you are adding native
-dependencies needed for per-platform integration. In general, use
-`pubspec.yaml` to declare external dependencies in Flutter. A good place to
-find great packages for Flutter is
-[Pub](https://pub.dartlang.org/flutter/packages/).
+虽然在 Flutter 项目的 iOS 文件夹中有一个 Podfile ，但只有在您添加每个平台集成所需的本地依赖项时才使用它。通常，使用 `pubspec.yaml` 在 Flutter 中声明外部依赖关系。[Pub](https://pub.dartlang.org/flutter/packages/) 是一个很好的地方来找找 Flutter 依赖包 。
 
-# ViewControllers
 
-## What is the equivalent to `ViewController`s in Flutter?
+# 视图控制器
 
-In iOS, a `ViewController` represents a portion of user interface, most
-commonly used for a screen or section. These are composed together to build
-complex user interfaces, and help scale your application's UI. In Flutter, this
-job falls to Widgets. As mentioned in the Navigation
-section, screens in Flutter are represented by Widgets since "everything is a
-widget!" Use a `Navigator` to move between different `Route`s
-that represent different screens or pages, or maybe different states or
-renderings of the same data.
+## iOS 中的 `ViewController` 在 Flutter 中对应什么？
 
-## How do I listen to iOS lifecycle events?
+在 iOS 中，`ViewController` 代表用户界面的一部分，最常用于屏幕或部分。它们组合在一起构建复杂的用户界面，并帮助扩展应用程序的用户界面。在 Flutter 中，这项工作属于 Widget 。正如导航部分所述，Flutter 中的屏幕由 Widget 表示，因为“一切都是  widget ！”使用 `Navigator` 在代表不同屏幕或页面的不同 Route` 跳转，或者可能会在相同数据的不同状态或效果图之间跳转。
 
-In iOS, you can override methods to the `ViewController` to capture lifecycle
-methods for the view itself, or register lifecycle callbacks in the
-`AppDelegate`. In Flutter you have neither concept, but you can instead listen
-to lifecycle events by hooking into the `WidgetsBinding` observer and
-listening to the `didChangeAppLifecycleState()` change event.
+## 如何监听 iOS 的生命周期？
 
-The observable lifecycle events are:
+在iOS中，您可以重写 `ViewController` 的方法以捕获视图本身的生命周期方法，或者在 `AppDelegate` 中注册生命周期回调。在 Flutter 中，没有这样的概念，但是可以通过挂接到 `WidgetsBinding` 观察者并监听 `didChangeAppLifecycleState()` 更改事件来监听生命周期事件。
 
-* `inactive` — The application is in an inactive state and is not receiving
-user input. This event only works on iOS, as there is no equivalent event on
-Android.
-* `paused` — The application is not currently visible to
-the user, is not responding to user input, but is running in the background.
-* `resumed` — The application is visible and responding to user input.
-* `suspending` — The application is suspended momentarily. The iOS platform
-has no equivalent event.
+可观察的生命周期事件是：
 
-For more details on the meaning of these states, see
-[`AppLifecycleStatus` documentation](https://docs.flutter.io/flutter/dart-ui
-/AppLifecycleState-class.html).
+* `inactive` — 应用程序处于非活动状态，并且未接收用户输入。此事件仅适用于 iOS ，因为 Android 上没有相应的事件。
+* `paused` — 该应用程序目前对用户不可见，不响应用户输入，但正在后台运行。
+* `resumed` — 该应用程序可见并响应用户输入。
+* `suspending` — 该应用暂时中止。 iOS平台没有相应的事件。
 
-# Layouts
+有关这些状态含义的更多详细信息，请参阅 [`AppLifecycleStatus` 文档](https://docs.flutter.io/flutter/dart-ui
+/AppLifecycleState-class.html)。
 
-## What is the equivalent of a `UITableView` or `UICollectionView` in Flutter?
+# 布局
 
-In iOS, you might show a list in either a `UITableView` or a
-`UICollectionView`. In Flutter, you have a similar implementation using a
-`ListView`.
-In iOS, these views have delegate methods for deciding the number of rows, the
-cell for each index path, and the size of the cells.
+## iOS 中的 `UITableView` 和 `UICollectionView` 在 Flutter 中对应什么？
 
-Due to Flutter’s immutable widget pattern, you pass a list of widgets to your
-`ListView`, and Flutter takes care of making sure that scrolling is fast
-and smooth.
+在iOS中，您可能会在 `UITableView` 或 `UICollectionView` 中显示一个列表。在 Flutter 中，使用 `ListView` 实现类似的显示。在 iOS 中，这些视图具有代理方法来决定行数，每个单元格的索引以及单元格的大小。
+
+由于 Flutter 的不可变 widget 模式，将 widget 列表传递给您的 `ListView` ，并且 Flutter 负责确保滚动快速而平稳。
 
 <!-- skip -->
 {% prettify dart %}
@@ -1188,10 +1075,9 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-## How do I know which list item is clicked?
+## 如何知道列表的哪个条目被点击？
 
-In iOS, you implement the delegate method, `tableView:didSelectRowAtIndexPath:`.
-In Flutter, use the touch handling provided by the passed-in widgets.
+在 iOS 中，实现代理方法  `tableView:didSelectRowAtIndexPath:` 。在 Flutter 中，使用由传入的 widget 提供的触摸处理。
 
 <!-- skip -->
 {% prettify dart %}
@@ -1251,22 +1137,13 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-## How do I update `ListView`s dynamically?
+## 如何动态更新 `ListView` ？
 
-In iOS, you update the data for the list view, and notify the table or
-collection view using the `reloadData` method.
+在 iOS 中，使用 `reloadData` 方法通知表或集合视图来更新列表视图的数据。
 
-In Flutter, if you were to update the list of widgets inside a `setState()`,
-you would quickly see that your data did not change visually.
-This is because when `setState()` is called, the Flutter rendering engine
-looks at the widget tree to see if anything has changed. When it gets to your
-`ListView`, it performs a `==` check, and determines that the two `ListView`s are the
-same. Nothing has changed, so no update is required.
+在Flutter中，如果您要更新 `setState()` 内部的 widget 列表，您很快就会发现数据不会在视觉上发生变化。这是因为当调用 `setState()` 时，Flutter 渲染引擎会查看 widget 树以查看是否有更改。当它到达你的 `ListView` 时，它执行 `==` 检查，并确定两个 `ListView` 是相同的。没有任何改变，所以不需要更新。
 
-For a simple way to update your `ListView`, create a new `List` inside of
-`setState()`, and copy the data from the old list to the new list.
-While this approach is simple, it is not recommended for large data sets,
-as shown in the next example.
+为了更新 `ListView` 的一个简单方法，在 `setState()` 中创建一个新 `List` ，并将旧列表中的数据复制到新列表中。虽然这种方法很简单，但不推荐用于大数据集，如下一个示例所示。
 
 <!-- skip -->
 {% prettify dart %}
@@ -1336,9 +1213,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-The recommended, efficient, and effective way to build a list uses a
-`ListView.Builder`. This method is great when you have a dynamic
-list or a list with very large amounts of data.
+使用 `ListView.Builder` 建立一个列表，这个方式是非常推荐的，高效的和有效的。当拥有动态列表或包含大量数据的列表时，此方法非常有用。
 
 <!-- skip -->
 {% prettify dart %}
@@ -1412,25 +1287,18 @@ class _SampleAppPageState extends State<SampleAppPage> {
 }
 {% endprettify %}
 
-Instead of creating a "ListView", create a `ListView.builder` that
-takes two key parameters: the initial length of the list, and an `ItemBuilder`
-function.
+创建一个 `ListView.builder` 接受两个关键参数：列表的初始长度和一个 `ItemBuilder` 函数,而不是创建一个 “ListView” 。
 
-The `ItemBuilder` function is similar to the `cellForItemAt` delegate method
-in an iOS table or collection view, as it takes a position, and returns the
-cell you want rendered at that position.
+`ItemBuilder` 函数与 iOS 表格或集合视图中的 `cellForItemAt` 委托方法类似，因为它需要一个位置，并返回要在该位置呈现的单元格。
 
-Finally, but most importantly, notice that the `onTap()` function
-doesn't recreate the list anymore, but instead `.add`s to it.
+最后，但最重要的是，注意 `onTap()` 函数不再重新创建列表，而是 `.add` 。
 
-## What is the equivalent of a `ScrollView` in Flutter?
 
-In iOS, you wrap your views in a `ScrollView` that allows a user to scroll
-your content if needed.
+## iOS 中的 `ScrollView` 在 Flutter 中对应什么？
 
-In Flutter the easiest way to do this is using the `ListView` widget. This
-acts as both a `ScrollView` and an iOS `TableView`, as you can layout widgets
-in a vertical format.
+在 iOS 中，您可以将视图封装在 `ScrollView` 中，以便用户根据需要滚动内容。
+
+在 Flutter 中，最简单的方法是使用 `ListView` 控件。这既可以作为 `ScrollView` 也可以作为 iOS 的 `TableView`，因为您可以以垂直格式布局 widget 。
 
 <!-- skip -->
 {% prettify dart %}
@@ -1447,21 +1315,18 @@ Widget build(BuildContext context) {
 }
 {% endprettify %}
 
-For more detailed docs on how to lay out widgets in Flutter,
-see the [layout tutorial](/widgets/layout/).
+更多有关如何在 Flutter 中布置 widget 的详细文档，请参阅 [布局教程](/widgets/layout/)。
 
-# Gesture detection and touch event handling
+# 手势检测和触摸事件处理
 
-## How do I add a click listener to a widget in Flutter?
+## 在 Flutter 中，如何为 widget 添加点击监听器？
 
-In iOS, you attach a `GestureRecognizer` to a view to handle
-click events. In Flutter, there are two ways of adding touch listeners:
+在 iOS 中，将 `GestureRecognizer` 附加到视图以处理点击事件。在 Flutter 中，添加触摸监听器有两种方式：
 
 <ol markdown="1">
 <li markdown="1">
-If the widget supports event detection, pass a function to it,
- and handle the event in the function. For example, the
-`RaisedButton` widget has an `onPressed` parameter:
+如果 widget 支持事件检测，则将函数传递给它，并在函数中处理事件。例如，
+ `RaisedButton` widget 有一个 `onPressed` 参数:
 
    <!-- skip -->
    {% prettify dart %}
@@ -1478,8 +1343,7 @@ If the widget supports event detection, pass a function to it,
 </li>
 
 <li markdown="1">
-If the Widget doesn't support event detection, wrap the
-widget in a GestureDetector and pass a function to the `onTap` parameter.
+如果 Widget 不支持事件检测，则将该 Widget 封装在 GestureDetector 中，并将函数传递给 `onTap` 参数。
 
    <!-- skip -->
    {% prettify dart %}
@@ -1504,51 +1368,38 @@ widget in a GestureDetector and pass a function to the `onTap` parameter.
 </li>
 </ol>
 
-## How do I handle other gestures on widgets?
+## 如何处理 widget 的其他手势？
 
-Using `GestureDetector` you can listen to a wide range of gestures such as:
+使用 `GestureDetector` 可以收听各种手势，例如：
 
-* Tapping
+* 点击
 
-  * `onTapDown` — A pointer that might cause a tap has contacted the screen at a
-    particular location.
-  * `onTapUp` — A pointer that triggers a tap has stopped contacting the
-    screen at a particular location.
-  * `onTap` — A tap has occurred.
-  * `onTapCancel` — The pointer that previously triggered the `onTapDown` won't
-    cause a tap.
+  * `onTapDown` — 已经在特定屏幕位置按下。
+  * `onTapUp` — 在屏幕特定位置触发点击的点停止接触屏幕。
+  * `onTap` — 点击已发生。
+  * `onTapCancel` — 先前触发 `onTapDown` 的点击不会导致点击。
 
-* Double tapping
+* 双击
 
-  * `onDoubleTap` — The user tapped the screen at the same location twice in
-    quick succession.
+  * `onDoubleTap` — 用户快速连续两次在同一位置点击屏幕。
 
-* Long pressing
+* 长按
 
-  * `onLongPress` — A pointer has remained in contact with the screen at the same
-    location for a long period of time.
+  * `onLongPress` — 在屏幕相同位置长时间保持点击状态。
 
-* Vertical dragging
+* 垂直拖动
 
-  * `onVerticalDragStart` — A pointer has contacted the screen and might begin to
-    move vertically.
-  * `onVerticalDragUpdate` — A pointer in contact with the screen
-    has moved further in the vertical direction.
-  * `onVerticalDragEnd` — A pointer that was previously in contact with the
-    screen and moving vertically is no longer in contact with the screen and was
-    moving at a specific velocity when it stopped contacting the screen.
+  * `onVerticalDragStart` — 与屏幕接触的点在垂直方向上进一步移动。
+  * `onVerticalDragUpdate` — 与屏幕接触的点在垂直方向上进一步移动。
+  * `onVerticalDragEnd` — 先前与屏幕接触并垂直移动的点不再与屏幕接触，并且在停止接触屏幕时以特定速度移动。
 
-* Horizontal dragging
+* 水平拖动
 
-  * `onHorizontalDragStart` — A pointer has contacted the screen and might begin
-    to move horizontally.
-  * `onHorizontalDragUpdate` — A pointer in contact with the screen
-    has moved further in the horizontal direction.
-  * `onHorizontalDragEnd` — A pointer that was previously in contact with the
-    screen and moving horizontally is no longer in contact with the screen.
+  * `onHorizontalDragStart` — 触摸点已经与屏幕接触并可能开始水平移动。
+  * `onHorizontalDragUpdate` — 与屏幕接触的点已经沿水平方向进一步移动。
+  * `onHorizontalDragEnd` — 先前与屏幕接触并水平移动的点不再与屏幕接触。
 
-The following example shows a `GestureDetector` that rotates the Flutter logo
-on a double tap:
+以下示例显示了一个 `GestureDetector` ，双击上旋转 Flutter logo :
 
 <!-- skip -->
 {% prettify dart %}
@@ -1586,33 +1437,19 @@ class SampleApp extends StatelessWidget {
 }
 {% endprettify %}
 
-# Theming and text
+# 主题和文字
 
-## How do I theme an app?
+## How do I theme an app? 如何为应用程序设置主题？
 
-Out of the box, Flutter comes with a beautiful implementation of Material Design,
-which takes care of a lot of styling and theming needs that you would typically do.
+开箱即用，Flutter 带有一个美丽的 Material Design 实现，它可以处理您通常需要处理的大量样式和主题需求。
 
-To take full advantage of Material Components in your app, declare a top-level
-widget, MaterialApp, as the entry point to your application. MaterialApp is a convenience
-widget that wraps a number of widgets that are commonly required for applications
-implementing Material Design. It builds upon a WidgetsApp by adding Material
-specific functionality.
+要充分利用应用程序中的 Material 组件，请声明一个顶级 widget &mdash; MaterialApp 作为应用程序的入口点。 MaterialApp 是一个方便的 widget ，它包装了许多实现 Material Design 的应用程序通常需要的 widget 。它通过添加 Material 特定功能构建在 WidgetsApp 上。
 
-But Flutter is flexible and expressive enough to implement any design language.
-On iOS, you can use the
-[Cupertino library](https://docs.flutter.io/flutter/cupertino/cupertino-library.html)
-to produce an interface that adheres to the [Human Interface
-Guidelines](https://developer.apple.com/ios/human-interface-guidelines/overview/themes/).
-For the full set of these widgets, see the
-[Cupertino widgets gallery](/widgets/cupertino/).
+但是，Flutter 具有足够的灵活性和表现力，可以实现任何设计语言。在 iOS 上，您可以使用 [Cupertino 库](https://docs.flutter.io/flutter/cupertino/cupertino-library.html)生成符合[人机界面指南](https://developer.apple.com/ios/human-interface-guidelines/overview/themes/)的界面。有关这些 widget 的完整集合，请参阅 [Cupertino 小部件库](/widgets/cupertino/)。
 
-You can also use a `WidgetApp` as your app widget, which provides some of the
-same functionality, but is not as rich as `MaterialApp`.
+您还可以使用 `WidgetApp` 作为您的应用 widget，它提供了一些相同的功能，但不像 `MaterialApp` 那么丰富。
 
-To customize the colors and styles of any child components, pass a
-`ThemeData` object to the `MaterialApp` widget. For example, in the code below,
-the primary swatch is set to blue and text selection color is red.
+要自定义任何子组件的颜色和样式，请将 `ThemeData` 对象传递给 `MaterialApp` widget。例如，在下面的代码中，主色板设置为蓝色，文本选择颜色为红色。
 
 <!-- skip -->
 {% prettify dart %}
@@ -1631,12 +1468,9 @@ class SampleApp extends StatelessWidget {
 }
 {% endprettify %}
 
-## How do I set custom fonts on my `Text` widgets?
+## 如何为 `Text` 设置自定义字体？
 
-In iOS, you import any `ttf` font files into your project and create a
-reference in the `info.plist` file. In Flutter, place the font file
-in a folder and reference it in the `pubspec.yaml` file, similar to how you
-import images.
+在 iOS 中，您可以将任何 ttf 字体文件导入到项目中，并在 `info.plist` 文件中创建一个引用。在 Flutter 中，将字体文件放在一个文件夹中，并将其引用到 `pubspec.yaml` 文件中，这与导入图片的方式类似。
 
 <!-- skip -->
 {% prettify yaml %}
@@ -1647,7 +1481,7 @@ fonts:
        - style: italic
 {% endprettify %}
 
-Then assign the font to your `Text` widget:
+然后将字体赋值给你的 `Text` ：
 
 <!-- skip -->
 {% prettify dart %}
@@ -1667,11 +1501,9 @@ Widget build(BuildContext context) {
 }
 {% endprettify %}
 
-## How do I style my `Text` widgets?
+## 如何设计 `Text` ？
 
-Along with fonts, you can customize other styling elements on a `Text` widget.
-The style parameter of a `Text` widget takes a `TextStyle` object, where you can
-customize many parameters, such as:
+与字体一起，您可以在 `Text` 上自定义其他样式元素。 `Text` 的样式参数需要一个 `TextStyle` 对象，您可以在其中自定义许多参数，例如：
 
 * `color`
 * `decoration`
@@ -1688,19 +1520,13 @@ customize many parameters, such as:
 * `textBaseline`
 * `wordSpacing`
 
-# Form input
+# 表单输入
 
-## How do forms work in Flutter? How do I retrieve user input?
+## 表格如何在 Flutter 中工作？如何检索用户输入？
 
-Given how Flutter uses immutable widgets with a separate state, you might be
-wondering how user input fits into the picture. On iOS, you usually
-query the widgets for their current values when it's time to submit the
-user input, or action on it. How does that work in Flutter?
+鉴于 Flutter 如何在不同的状态下使用不可变的 widget ，您可能想知道用户输入如何适应图片。在 iOS 上，当您需要提交用户输入或对其进行操作时，您通常会查询窗口widget 的当前值。这在 Flutter 中如何工作？
 
-In practice forms are handled, like everything in Flutter, by specialized
-widgets. If you have a `TextField` or a `TextFormField`, you can supply a
-[`TextEditingController`](https://docs.flutter.io/flutter/widgets/TextEditingController-class.html)
-to retrieve user input:
+在实践中，表格是通过专门的 widget 处理的，如 Flutter 中的所有内容。如果您有 `TextField` 或 `TextFormField` ，则可以提供 [`TextEditingController`](https://docs.flutter.io/flutter/widgets/TextEditingController-class.html) 来检索用户输入：
 
 <!-- skip -->
 {% prettify dart %}
@@ -1755,11 +1581,15 @@ You can find more information and the full code listing in
 [Retrieve the value of a text field](/cookbook/forms/retrieve-input/),
 from the [Flutter Cookbook](https://flutter.io/cookbook/).
 
-## What is the equivalent of a placeholder in a text field?
+您可以从Flutter Cookbook中找到更多信息和完整代码列表，以检索文本字段的值。
+
+## What is the equivalent of a placeholder in a text field?在文本字段中占位符的等同物是什么？
 
 In Flutter you can easily show a "hint" or a placeholder text for your field by
 adding an `InputDecoration` object to the decoration constructor parameter for
 the `Text` widget:
+
+在Flutter中，您可以通过向Text构件的装饰构造函数参数添加InputDecoration对象，轻松地为场显示“提示”或占位符文本：
 
 <!-- skip -->
 {% prettify dart %}
@@ -1770,14 +1600,18 @@ body: new Center(
 )
 {% endprettify %}
 
-## How do I show validation errors?
+## 如何显示验证错误？
 
 Just as you would with a "hint", pass an `InputDecoration` object
 to the decoration constructor for the `Text` widget.
 
+就像使用“提示”一样，将一个InputDecoration对象传递给Text文本的装饰构造函数。
+
 However, you don't want to start off by showing an error.
 Instead, when the user has entered invalid data,
 update the state, and pass a new `InputDecoration` object.
+
+但是，您不想通过显示错误开始。相反，当用户输入无效数据时，请更新状态并传递一个新的InputDecoration对象。
 
 <!-- skip -->
 {% prettify dart %}
@@ -1848,76 +1682,47 @@ class _SampleAppPageState extends State<SampleAppPage> {
 
 ## 如何与平台以及平台原生代码交互？
 
-Flutter doesn't run code directly on the underlying platform; rather, the Dart code
-that makes up a Flutter app is run natively on the device, "sidestepping" the SDK
-provided by the platform. That means, for example, when you perform a network request
-in Dart, it runs directly in the Dart context. You don't use the Android or iOS
-APIs you normally take advantage of when writing native apps. Your Flutter
-app is still hosted in a native app's `ViewController` as a view, but you don't
-have direct access to the `ViewController` itself, or the native framework.
+Flutter 不直接在底层平台上运行代码;相反，构成 Flutter 应用程序的 Dart 代码在设备上本地运行，“避开”平台提供的SDK。这意味着，假如，当您在 Dart 中执行网络请求时，它将直接在 Dart 上下文中运行。在编写本机应用程序时，您不会使用通常使用的 Android 或 iOS  API 。您的 Flutter 应用程序仍作为视图托管在本机应用程序的 `ViewController` 中，但您无法直接访问 `ViewController` 本身或本机框架。
 
-This doesn't mean Flutter apps cannot interact with those native APIs, or with any
-native code you have. Flutter provides [platform channels](/platform-channels/),
-that communicate and exchange data with the `ViewController` that
-hosts your Flutter view. Platform channels are essentially an asynchronous messaging
-mechanism that bridge the Dart code with the host `ViewController` and
-the iOS framework it runs on. You can use platform channels to execute a method on
-the native side, or to retrieve some data from the device's sensors, for example.
+这并不意味着 Flutter 应用程序无法与这些本地 API 或任何本地代码进行交互。 Flutter 提供[平台通道](/platform-channels/)，与承载 Flutter 视图的 `ViewController` 进行通信和交换数据。平台通道本质上是一个异步消息传递机制，它将 Dart 代码与主机 `ViewController` 及其运行的 iOS 框架桥接在一起。例如，您可以使用平台通道在本机端执行方法，或从设备的传感器检索一些数据。
 
-In addition to directly using platform channels, you can use a variety of pre-made
-[plugins](/using-packages/) that encapsulate the native and
-Dart code for a specific goal. For example, you can use a plugin to access
-the camera roll and the device camera directly from Flutter, without having to
-write your own integration. Plugins are found [on Pub](https://pub.dartlang.org/),
-Dart and Flutter's open source package repository. Some packages might
-support native integrations on iOS, or Android, or both.
 
-If you can't find a plugin on Pub that fits your needs, you can
-[write your own](/developing-packages/)
-and [publish it on Pub](/developing-packages/#publish).
+除了直接使用平台频道之外，您还可以使用各种预制的[插件](/using-packages/)封装原生和 Dart 代码以实现特定目标。例如，您可以使用插件直接从 Flutter 访问相机相册和设备相机，而无需编写自己的集成。 Plugins 可以在 Dart 和 Flutter 的开源软件包存储库( [Pub](https://pub.dartlang.org/) )中找到。某些软件包可能支持 iOS 或 Android 或两者的本机集成。
+
+如果您无法在 Pub 上找到适合您需求的插件，您可以[编写自己的插件](/developing-packages/)并将其[发布到 Pub 上](/developing-packages/#publish)。
 
 ## 如何使用 GPS 传感器？
 
-Use the [`location`](https://pub.dartlang.org/packages/location) community plugin.
+使用 [`location`](https://pub.dartlang.org/packages/location) 社区插件。
 
 ## 如何使用相机服务?
 
-The [`image_picker`](https://pub.dartlang.org/packages/image_picker) plugin is popular
-for accessing the camera.
+[`image_picker`](https://pub.dartlang.org/packages/image_picker) 插件是访问摄像机的热门选择。
 
 ## 如何使用 Facebook 进行登录?
 
-To log in with Facebook, use the
-[`flutter_facebook_login`](https://pub.dartlang.org/packages/flutter_facebook_login) community plugin.
+要使用 Facebook 登录，请使用 [`flutter_facebook_login`](https://pub.dartlang.org/packages/flutter_facebook_login)  社区插件。
 
-## How do I use Firebase features?
+## 如何使用Firebase功能？
 
-Most Firebase functions are covered by
-[first party plugins](https://pub.dartlang.org/flutter/packages?q=firebase).
-These plugins are first-party integrations, maintained by the Flutter team:
+大多数 Firebase 功能都由[第一方插件](https://pub.dartlang.org/flutter/packages?q=firebase)覆盖。这些插件是由 Flutter 团队维护的第一方集成：
 
- * [`firebase_admob`](https://pub.dartlang.org/packages/firebase_admob) for Firebase AdMob
- * [`firebase_analytics`](https://pub.dartlang.org/packages/firebase_analytics) for Firebase Analytics
- * [`firebase_auth`](https://pub.dartlang.org/packages/firebase_auth) for Firebase Auth
- * [`firebase_core`](https://pub.dartlang.org/packages/firebase_core) for Firebase's Core package
- * [`firebase_database`](https://pub.dartlang.org/packages/firebase_database) for Firebase RTDB
- * [`firebase_storage`](https://pub.dartlang.org/packages/firebase_storage) for Firebase Cloud Storage
- * [`firebase_messaging`](https://pub.dartlang.org/packages/firebase_messaging) for Firebase Messaging (FCM)
- * [`cloud_firestore`](https://pub.dartlang.org/packages/cloud_firestore) for Firebase Cloud Firestore
+ * Firebase AdMob [`firebase_admob`](https://pub.dartlang.org/packages/firebase_admob) 
+ * Firebase Analytics [`firebase_analytics`](https://pub.dartlang.org/packages/firebase_analytics)
+ * Firebase Auth [`firebase_auth`](https://pub.dartlang.org/packages/firebase_auth)
+ * Firebase Core [`firebase_core`](https://pub.dartlang.org/packages/firebase_core) 
+ * Firebase RTDB [`firebase_database`](https://pub.dartlang.org/packages/firebase_database)
+ * Firebase Cloud Storage [`firebase_storage`](https://pub.dartlang.org/packages/firebase_storage)
+ * Firebase Messaging (FCM) [`firebase_messaging`](https://pub.dartlang.org/packages/firebase_messaging)
+ * Firebase Cloud Firestore [`cloud_firestore`](https://pub.dartlang.org/packages/cloud_firestore)
 
-You can also find some third-party Firebase plugins on Pub that cover areas
-not directly covered by the first-party plugins.
+您还可以在 Pub 上找到一些第三方 Firebase 插件，这些插件涵盖了第一方插件未覆盖的区域。
 
-## How do I build my own custom native integrations?
+## 如何构建自己的定制本地集成？
 
-If there is platform-specific functionality that Flutter or its community
-Plugins are missing, you can build your own following the
-[developing packages and plugins](/developing-packages/) page.
+如果 Flutter 或其社区插件缺失的平台特定功能，您可以根据[开发包和插件](/developing-packages/)页面构建自己的功能。
 
-Flutter's plugin architecture, in a nutshell, is much like using an Event bus in
-Android: you fire off a message and let the receiver process and emit a result
-back to you. In this case, the receiver is code running on the native side
-on Android or iOS.
+简而言之，Flutter 的插件架构就像在 Android 中使用 Event bus 一样：您触发一条消息并让接收者进行处理并将结果发回给您。在这种情况下，接收者是在 Android 或 iOS 上运行在本机端的代码。
 
 # 数据库和本地存储
 
