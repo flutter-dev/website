@@ -956,9 +956,6 @@ dependencies:
   intl: "^0.15.6"
 {% endprettify %}
 
-To use the `flutter_localizations` package,
-specify the `localizationsDelegates` and `supportedLocales` on the app widget:
-
 要使用 `flutter_localizations` 包，请在应用部件上指定 `localizationsDelegates` 和 `supportedLocales` ：
 
 <!-- skip -->
@@ -1439,7 +1436,7 @@ class SampleApp extends StatelessWidget {
 
 # 主题和文字
 
-## How do I theme an app? 如何为应用程序设置主题？
+## 如何为应用程序设置主题？
 
 开箱即用，Flutter 带有一个美丽的 Material Design 实现，它可以处理您通常需要处理的大量样式和主题需求。
 
@@ -1577,19 +1574,11 @@ class _MyFormState extends State<MyForm> {
 }
 {% endprettify %}
 
-You can find more information and the full code listing in
-[Retrieve the value of a text field](/cookbook/forms/retrieve-input/),
-from the [Flutter Cookbook](https://flutter.io/cookbook/).
+您可以从 [Flutter Cookbook](https://flutter.io/cookbook/) 中找到更多信息和[检索文本字段的值](/cookbook/forms/retrieve-input/)中的完整代码列表。 
 
-您可以从Flutter Cookbook中找到更多信息和完整代码列表，以检索文本字段的值。
+## iOS 中文本框的占位符在 Flutter 中对应什么？
 
-## What is the equivalent of a placeholder in a text field?在文本字段中占位符的等同物是什么？
-
-In Flutter you can easily show a "hint" or a placeholder text for your field by
-adding an `InputDecoration` object to the decoration constructor parameter for
-the `Text` widget:
-
-在Flutter中，您可以通过向Text构件的装饰构造函数参数添加InputDecoration对象，轻松地为场显示“提示”或占位符文本：
+在 Flutter 中，您可以通过向 `Text` 小部件的装饰构造函数参数添加一个 `InputDecoration` 对象，轻松地为您的字段显示“提示”或占位符文本：
 
 <!-- skip -->
 {% prettify dart %}
@@ -1602,16 +1591,9 @@ body: new Center(
 
 ## 如何显示验证错误？
 
-Just as you would with a "hint", pass an `InputDecoration` object
-to the decoration constructor for the `Text` widget.
+就像使用“提示”一样，将一个 `InputDecoration` 对象传递给 `Text` 文本的装饰构造函数。
 
-就像使用“提示”一样，将一个InputDecoration对象传递给Text文本的装饰构造函数。
-
-However, you don't want to start off by showing an error.
-Instead, when the user has entered invalid data,
-update the state, and pass a new `InputDecoration` object.
-
-但是，您不想通过显示错误开始。相反，当用户输入无效数据时，请更新状态并传递一个新的InputDecoration对象。
+但是，您不想通过显示错误开始。相反，当用户输入无效数据时，更新状态并传递一个新的 `InputDecoration` 对象。
 
 <!-- skip -->
 {% prettify dart %}
