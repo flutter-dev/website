@@ -25,7 +25,7 @@ Future<http.Response> fetchPost() {
 }
 ```
 
-## Complete Example
+## Complete example
 
 This example builds upon the [Fetching Data from the Internet](/cookbook/networking/fetch-data/) 
 recipe.
@@ -44,7 +44,7 @@ Future<Post> fetchPost() async {
   );
   final responseJson = json.decode(response.body);
 
-  return new Post.fromJson(responseJson);
+  return Post.fromJson(responseJson);
 }
 
 class Post {
@@ -56,7 +56,7 @@ class Post {
   Post({this.userId, this.id, this.title, this.body});
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    return new Post(
+    return Post(
       userId: json['userId'],
       id: json['id'],
       title: json['title'],

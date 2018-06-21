@@ -76,7 +76,7 @@ class Post {
   Post({this.userId, this.id, this.title, this.body});
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    return new Post(
+    return Post(
       userId: json['userId'],
       id: json['id'],
       title: json['title'],
@@ -91,16 +91,25 @@ class Post {
 Now, we'll update the `fetchPost` function to return a `Future<Post>`. To do so,
 we'll need to:
 
-  1. Convert the response body into a json `Map` with the `dart:convert` package
-  2. Convert the json `Map` into a `Post` using the `fromJson` factory.
+  1. Convert the response body into a json `Map` with the `dart:convert`
+  package.
+  2. If the server returns an "OK" response with a status code of 200, convert 
+  the json `Map` into a `Post` using the `fromJson` factory.
+  3. If the server returns an unexpected response, throw an error
 
 <!-- skip -->
 ```dart
 Future<Post> fetchPost() async {
-  final response = await http.get('https://jsonplaceholder.typicode.com/posts/1');
-  final responseJson = json.decode(response.body); 
-  
-  return new Post.fromJson(responseJson); 
+  final response =
+      await http.get('https://jsonplaceholder.typicode.com/posts/1');
+
+  if (response.statusCode == 200) {
+    // If server returns an OK response, parse the JSON
+    return Post.fromJson(json.decode(response.body));
+  } else {
+    // If that response was not OK, throw an error.
+    throw Exception('Failed to load post');
+  }
 }
 ```
 
@@ -123,22 +132,30 @@ We must provide two parameters:
 
 <!-- skip -->
 ```dart
-new FutureBuilder<Post>(
+FutureBuilder<Post>(
   future: fetchPost(),
   builder: (context, snapshot) {
     if (snapshot.hasData) {
-      return new Text(snapshot.data.title);
+      return Text(snapshot.data.title);
     } else if (snapshot.hasError) {
-      return new Text("${snapshot.error}");
+      return Text("${snapshot.error}");
     }
 
     // By default, show a loading spinner
-    return new CircularProgressIndicator();
+    return CircularProgressIndicator();
   },
 );
 ```
 
-## Complete Example
+## Testing
+
+For information on how to test this functionality, please see the following 
+recipes:
+
+  * [Introduction to unit testing](/cookbook/testing/unit-test/)
+  * [Mock dependencies using Mockito](/cookbook/testing/mocking/) 
+
+## Complete example
 
 ```dart
 import 'dart:async';
@@ -150,9 +167,14 @@ import 'package:http/http.dart' as http;
 Future<Post> fetchPost() async {
   final response =
       await http.get('https://jsonplaceholder.typicode.com/posts/1');
-  final responseJson = json.decode(response.body);
 
-  return new Post.fromJson(responseJson);
+  if (response.statusCode == 200) {
+    // If the call to the server was successful, parse the JSON
+    return Post.fromJson(json.decode(response.body));
+  } else {
+    // If that call was not successful, throw an error.
+    throw Exception('Failed to load post');
+  }
 }
 
 class Post {
@@ -164,7 +186,7 @@ class Post {
   Post({this.userId, this.id, this.title, this.body});
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    return new Post(
+    return Post(
       userId: json['userId'],
       id: json['id'],
       title: json['title'],
@@ -173,32 +195,32 @@ class Post {
   }
 }
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Fetch Data Example',
-      theme: new ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Fetch Data Example'),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Fetch Data Example'),
         ),
-        body: new Center(
-          child: new FutureBuilder<Post>(
+        body: Center(
+          child: FutureBuilder<Post>(
             future: fetchPost(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return new Text(snapshot.data.title);
+                return Text(snapshot.data.title);
               } else if (snapshot.hasError) {
-                return new Text("${snapshot.error}");
+                return Text("${snapshot.error}");
               }
 
               // By default, show a loading spinner
-              return new CircularProgressIndicator();
+              return CircularProgressIndicator();
             },
           ),
         ),
