@@ -4,13 +4,23 @@ layout: page
 homepage: true
 hide_title: true
 permalink: /
+description: >
+  Flutter is Google’s mobile UI framework for crafting high-quality
+  native experiences on iOS and Android in record time.
+  Flutter works with existing code, is used by developers and organizations
+  around the world, and is free and open source.
 ---
 
 <div class="homepage__illustration">
     <h1 class="homepage__illustration--text">
-        <span>Flutter Beta 版已发布!</span>
+        <span>最新版本：</span>
         &nbsp;
-        <a href="https://medium.com/flutter-io/announcing-flutter-beta-1-build-beautiful-native-apps-dc142aea74c0">了解更多</a>.
+        <a href="https://medium.com/flutter-io/flutter-release-preview-1-943a9b6ee65a?linkId=53249457">Flutter Release Preview 1</a>.
+    </h1>
+    <h1 class="homepage__illustration--text">
+        <span>翻译此网站：</span>
+        &nbsp;
+        <a href="https://github.com/flutter-dev/website/tree/master/zh_CN">了解更多</a>.
     </h1>
     <img src="images/homepage/header-illustration.png" 
          class="homepage__illustration--image"
